@@ -14,7 +14,8 @@
     "@soulmachines/smwebsdk": "^15.8.1",
     "next": "14.2.14",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-use-face-detection": "^1.0.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.5.0",
