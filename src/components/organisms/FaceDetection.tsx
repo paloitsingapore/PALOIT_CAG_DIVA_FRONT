@@ -14,7 +14,26 @@ interface BoundingBox {
   height: number;
 }
 
-const WebcamDemo: React.FC = () => {
+interface PassengerData {
+  rekognition_collection_id: string;
+  userId: string;
+  imageUrls: string[];
+  name: string;
+  gender: string;
+  faceIds: string[];
+  age: number;
+}
+
+export interface FaceRecognitionResponse {
+  message: string;
+  passengerData: PassengerData;
+}
+
+interface FaceRecognitionProps {
+  onFaceRecognized: (apiResponse: FaceRecognitionResponse) => void;
+}
+
+const FaceRecognition: React.FC<FaceRecognitionProps> = ({ onFaceRecognized }) => {
   const [faceDetectionStartTime, setFaceDetectionStartTime] = useState<number | null>(null);
   const [imageSent, setImageSent] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -25,10 +44,8 @@ const WebcamDemo: React.FC = () => {
       
       let base64Image = '';
       if (image instanceof HTMLCanvasElement) {
-        // Convert canvas to base64
         base64Image = image.toDataURL('image/jpeg').split(',')[1];
       } else if (image instanceof HTMLImageElement) {
-        // Create a canvas to draw the image and convert to base64
         const canvas = document.createElement('canvas');
         canvas.width = image.width;
         canvas.height = image.height;
@@ -36,7 +53,6 @@ const WebcamDemo: React.FC = () => {
         ctx?.drawImage(image, 0, 0);
         base64Image = canvas.toDataURL('image/jpeg').split(',')[1];
       } else if ('ImageBitmap' in window && image instanceof ImageBitmap) {
-        // Create a canvas to draw the ImageBitmap and convert to base64
         const canvas = document.createElement('canvas');
         canvas.width = image.width;
         canvas.height = image.height;
@@ -47,15 +63,15 @@ const WebcamDemo: React.FC = () => {
 
       if (base64Image) {
         try {
-          console.log(`base64Image: ${base64Image}`);
-          // const response = await fetch('your-api-endpoint', {
-          //   method: 'POST',
-          //   body: JSON.stringify({ image: base64Image }),
-          //   headers: { 'Content-Type': 'application/json' },
-          // });
-          // const data = await response.json();
-          // console.log('API response:', data);
           setImageSent(true);
+          const response = await fetch('https://ijiv62tdzd.execute-api.ap-southeast-2.amazonaws.com/prod/recognize', {
+            method: 'POST',
+            body: JSON.stringify({ image: base64Image }),
+            headers: { 'Content-Type': 'application/json' },
+          });
+          const data: FaceRecognitionResponse = await response.json();
+          
+          onFaceRecognized(data);
         } catch (error) {
           console.error('Error sending image to API:', error);
         }
@@ -63,7 +79,7 @@ const WebcamDemo: React.FC = () => {
         console.error('Failed to convert image to base64');
       }
     }
-  }, [imageSent]);
+  }, [imageSent, onFaceRecognized]);
 
   const handleOnResults = useCallback((results: FaceDetection.Results) => {
     if (results.detections && results.detections.length > 0) {
@@ -92,7 +108,7 @@ const WebcamDemo: React.FC = () => {
     }
   }, [faceDetectionStartTime, sendImageToAPI, imageSent]);
 
-  const { webcamRef, boundingBox, isLoading, detected, facesDetected } = useFaceDetection({
+  const { webcamRef } = useFaceDetection({
     faceDetectionOptions: {
       model: 'short',
     },
@@ -109,38 +125,17 @@ const WebcamDemo: React.FC = () => {
   });
 
   return (
-    <div>
-      <p>{`Loading: ${isLoading}`}</p>
-      <p>{`Face Detected: ${detected}`}</p>
-      <p>{`Number of faces detected: ${facesDetected}`}</p>
-      <p>{`Image sent: ${imageSent}`}</p>
-      <div style={{ width, height, position: 'relative' }}>
-        {boundingBox.map((box: BoundingBox, index: number) => (
-          <div
-            key={`${index + 1}`}
-            style={{
-              border: '4px solid red',
-              position: 'absolute',
-              top: `${box.yCenter * 100}%`,
-              left: `${box.xCenter * 100}%`,
-              width: `${box.width * 100}%`,
-              height: `${box.height * 100}%`,
-              zIndex: 1,
-            }}
-          />
-        ))}
-        <Webcam
-          ref={webcamRef}
-          forceScreenshotSourceSize
-          style={{
-            height,
-            width,
-            position: 'absolute',
-          }}
-        />
-      </div>
+    <div style={{ width: 0, height: 0, overflow: 'hidden' }}>
+      <Webcam
+        ref={webcamRef}
+        forceScreenshotSourceSize
+        style={{
+          width: '100%',
+          height: '100%',
+        }}
+      />
     </div>
   );
 };
 
-export default WebcamDemo;
+export default FaceRecognition;

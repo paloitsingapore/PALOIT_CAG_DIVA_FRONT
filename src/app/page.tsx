@@ -1,13 +1,20 @@
 "use client";
 
 import DigitalPersona from '@AssistedWayinding/components/organisms/DigitalPersona';
-import WebcamDemo from '@AssistedWayinding/components/organisms/FaceDetection';
+import FaceRecognition, { FaceRecognitionResponse } from '@AssistedWayinding/components/organisms/FaceDetection';
+import { useState } from 'react';
 
 export default function Home() {
+  const [personaId, setPersonaId] = useState<string>('unknown');
+  const handleFaceRecognized = (data: FaceRecognitionResponse) => {
+    console.log('Face recognized:', data);
+    setPersonaId(data.passengerData.userId);
+  };
+
   return (
     <div className="flex-grow flex">
-      {/* <WebcamDemo /> */}
-      <DigitalPersona />
+      <FaceRecognition onFaceRecognized={handleFaceRecognized} />
+      <DigitalPersona personaId={personaId} />
     </div>
   );
 }
