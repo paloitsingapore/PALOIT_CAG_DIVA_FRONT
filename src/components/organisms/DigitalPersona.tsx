@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Scene } from '@soulmachines/smwebsdk';
 import { TranscriptEntry } from '@AssistedWayinding/components/molecules/Transcript';
 import Help from '@AssistedWayinding/components/organisms/Help';
-const apiKey =
-    'eyJzb3VsSWQiOiJkZG5hLXBhbG9hMjUxLS1jaGFuZ2lhc3Npc3RhbnQiLCJhdXRoU2VydmVyIjoiaHR0cHM6Ly9kaC5zb3VsbWFjaGluZXMuY2xvdWQvYXBpL2p3dCIsImF1dGhUb2tlbiI6ImFwaWtleV92MV82NmFlMTJjYy0xNTNhLTQ2YWEtOWYxOS01ZGMzNDk3YTM4OGEifQ==';
+const apiKey = process.env.NEXT_PUBLIC_APP_API_KEY;
 import styles from '@AssistedWayinding/styles/Help.module.css';
 
 const DigitalPersona: React.FC = () => {
