@@ -1,0 +1,15 @@
+[
+    {
+        "action_type": "direction",
+        "action_target": "Krisflyer_Lounge"
+    },{
+        "action_type": "direction",
+        "action_target": "Gate_B4"
+    },{
+        "action_type": "direction",
+        "action_target": "Accessibility_Services"
+    },{
+        "action_type": "list",
+        "action_target": "Attractions"
+    }
+]

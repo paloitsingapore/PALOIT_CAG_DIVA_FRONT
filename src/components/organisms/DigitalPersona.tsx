@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Persona, Scene } from '@soulmachines/smwebsdk';
-import Transcript, { TranscriptEntry } from '@AssistedWayinding/components/molecules/Transcript';
+import { TranscriptEntry } from '@AssistedWayinding/components/molecules/Transcript';
+import Help from '@AssistedWayinding/components/organisms/Help';
+import styles from '@AssistedWayinding/styles/Help.module.css';
 
 const apiKey = process.env.NEXT_PUBLIC_APP_API_KEY;
 
@@ -82,7 +84,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId }) => {
   useEffect(() => {
     if (persona) {
       console.log('sending initial message to persona');
-      persona.conversationSend('', {}, {kind: 'init'}).then(() => {
+      persona.conversationSend('', {}, { kind: 'init' }).then(() => {
         console.log('initial message sent');
       }).catch((error) => {
         console.error('failed to send initial message:', error);
@@ -91,18 +93,27 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId }) => {
   }, [persona]);
 
   return (
-    <div className="flex-grow relative">
+    <div
+      className={styles.backgroundImage}
+      style={{
+        flexGrow: 1,
+        borderRadius: '24px 24px 24px 24px',
+        margin: '20px',
+      }}
+    >
       <video
+        id="avatar"
+        style={{
+          flex: 1,
+        }}
         ref={videoRef}
         autoPlay
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       />
-      <Transcript transcript={transcript} />
+      <Help />
     </div>
   );
 };
 
 export default DigitalPersona;
-
-

@@ -28,17 +28,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col h-full`}
       >
-        <main className="flex-grow flex">{children}</main>
-        <footer className="grid grid-cols-2 gap-4 p-4 bg-gray-100">
-          <div className="flex items-center bg-white p-4 rounded-lg shadow">
-            <span className="mr-4">📶</span>
-            <p>Scan your phone below to connect to our free Wi-Fi</p>
-          </div>
-          <div className="flex items-center bg-white p-4 rounded-lg shadow">
-            <span className="mr-4">🗺️</span>
-            <p>Scan your phone below to download the airport map</p>
-          </div>
-        </footer>
+        {children}
+        
       </body>
     </html>
   );

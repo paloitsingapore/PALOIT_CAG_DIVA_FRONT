@@ -1,0 +1,23 @@
+{
+    "from": "checkin",
+    "to": "gate_b1",
+    "map_image": "",
+    "direction_steps": [
+        {
+            "step": "Follow the signs",
+            "duration": "2 min"
+        },
+        {
+            "step": "Turn left",
+            "duration": "10 min"
+        },
+        {
+            "step": "Turn right",
+            "duration": "6 min"
+        },
+        {
+            "step": "Arrive at gate_b1",
+            "duration": "1 min"
+        }
+    ]
+}
