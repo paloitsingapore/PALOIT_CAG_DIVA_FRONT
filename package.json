@@ -11,7 +11,10 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "@react-google-maps/api": "^2.19.3",
     "@soulmachines/smwebsdk": "^15.8.1",
+    "axios": "^1.7.7",
+    "lucide-react": "^0.451.0",
     "next": "14.2.14",
     "react": "^18",
     "react-dom": "^18"
@@ -23,14 +26,18 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^8.8.1",
+    "@typescript-eslint/parser": "^8.8.1",
     "babel-jest": "^29.7.0",
-    "eslint": "^8",
+    "eslint": "^8.57.1",
     "eslint-config-next": "14.2.14",
+    "eslint-config-prettier": "^9.1.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
+    "prettier": "^3.3.3",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5.6.3"
   },
   "jest": {
     "testEnvironment": "jsdom",

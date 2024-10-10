@@ -1,0 +1,362 @@
+.container {
+    flex: 1;
+    height: 100%;
+}
+
+.dialogBox {
+    /* background-color: #333; */
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    /* display: flex; */
+    height: 100%;
+}
+
+.buttonContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.helpoptions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.helpoptions button {
+    width: 246px;
+    height: 87px;
+    font-family: Hind;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 26.4px;
+    background-color: #d3a3d3;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 24px;
+}
+
+.button {
+    background-color: white;
+    color: black;
+    padding: 15px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: Fixed (246px) px;
+    height: Fixed (87px) px;
+    top: 299px;
+    left: 562px;
+    padding: 24px 0px 0px 0px;
+    gap: 8px;
+    border-radius: 24px 0px 0px 0px;
+    opacity: 0px;
+}
+
+.button:hover {
+    background-color: #dedede;
+}
+
+.gateInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.map {
+    margin: 20px 0;
+}
+
+.map img {
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+}
+
+.steps {
+    max-height: 200px; /* Set a fixed height for the scrollable area */
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-right: 10px; /* Optional: Add padding to avoid scrollbar overlap */
+    padding: 24px 32px 24px 32px;
+    gap: 8px;
+    width: 512px;
+    border-radius: 32px 32px 32px 32px;
+    background-color: #3e005be5;
+}
+
+.step {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    display: flex;
+    padding: 10px;
+    /* background-color: #fff; */
+    border-radius: 10px;
+    margin: 5px 0;
+    color: white;
+}
+
+.step span {
+    margin: 4px 0;
+}
+
+.backgroundImage {
+    display: flex;
+    background-image: url('../public/images/bg_image.png');
+    background-size: cover;
+    background-position: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.mapImage {
+    background-image: url('../public/images/map.png'); /* Correct the path */
+    background-size: cover; /* Adjust as needed */
+    background-position: center; /* Adjust as needed */
+    width: 512px; /* Adjust as needed */
+    height: 150px; /* Adjust as needed */
+    border-radius: 15px;
+}
+
+/* src/App.css */
+.steps-list {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.step-card {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.step-card p {
+    margin: 5px 0;
+    color: #555;
+    font-size: 14px;
+}
+
+.step-card div {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input {
+    /* margin-top: 20px;
+  padding: 10px;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: Fixed (509px)px; */
+    height: Hug (45px) px;
+    top: 551px;
+    left: 562px;
+    padding: 12px 24px 12px 24px;
+    gap: 0px;
+    border-radius: 24px 0px 0px 0px;
+    justify: space-between;
+    opacity: 0px;
+}
+
+.helpBox {
+    font-family: Hind;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 52px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    width: Fixed (516px) px;
+    height: Hug (152px) px;
+    top: 123px;
+    left: 562px;
+    padding: 24px 32px 24px 32px;
+    gap: 8px;
+    border-radius: 32px 32px 32px 4px;
+    opacity: 0px;
+    background-color: purple;
+    padding: 16px; /* Optional: Add padding for better appearance */
+    color: white; /* Optional: Add text color for better readability */
+}
+
+.mapHeaderBox {
+    font-family: Hind;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 52px;
+    letter-spacing: 0.02em;
+    text-align: left;
+    width: 512px;
+    height: Hug(152px) px;
+    top: 123px;
+    left: 562px;
+    padding: 24px 32px 24px 32px;
+    gap: 8px;
+    border-radius: 32px 32px 32px 4px;
+    opacity: 0px;
+    background-color: purple;
+    /* padding: 16px; */
+    color: white;
+}
+
+.helpBox {
+    width: 51%;
+    background-color: purple;
+    /* border-radius: 24px 0px 0px 0px; */
+    padding: 16px;
+    color: white;
+    text-align: center; /* Center the text */
+}
+
+.helpoptions {
+    gap: 24px;
+    margin-top: 16px;
+    width: 51%;
+}
+
+.helpoptions button {
+    font-family: Hind;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 26.4px;
+    padding: 12px;
+    border: none;
+    border-radius: 24px;
+    background-color: #a645a6;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.helpoptions button:hover {
+    background-color: #8e3b8e;
+}
+
+.inputContainer {
+    position: relative;
+    width: 100%;
+    max-width: 509px;
+    height: 45px;
+    margin-top: 16px;
+}
+
+.inputContainer input {
+    width: 100%;
+    padding-left: 16px;
+    padding-right: 40px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-radius: 24px;
+    background-color: white;
+    color: black;
+    border: none;
+    outline: none;
+}
+
+.inputContainer .micIcon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.avatar {
+    flex: 1;
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media (max-width: 600px) {
+    .mapImage {
+        width: 100%;
+    }
+    .steps {
+        max-height: none;
+        overflow-y: auto;
+        padding-right: 10px;
+        padding: 24px 32px 24px 32px;
+        gap: 8px;
+        width: 100%;
+        border-radius: 32px 32px 32px 32px;
+        background-color: #3e005be5;
+    }
+    .mapHeaderBox {
+        font-family: Hind;
+        /* font-size: 20px; */
+        font-weight: 400;
+        /* line-height: 52px; */
+        letter-spacing: 0.02em;
+        text-align: left;
+        width: 100%;
+        height: Hug(152px) px;
+        top: 123px;
+        left: 562px;
+        padding: 24px 32px 24px 32px;
+        gap: 8px;
+        border-radius: 32px 32px 32px 4px;
+        opacity: 0px;
+        background-color: purple;
+        /* padding: 16px; */
+        color: white;
+    }
+    .avatar {
+        display: none;
+    }
+
+    .helpBox {
+        font-size: 14px;
+        padding: 12px;
+        width: auto;
+    }
+    .helpoptions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .helpoptions button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .inputContainer {
+        width: 100%;
+        height: 40px;
+    }
+
+    .inputContainer input {
+        padding-left: 12px;
+        padding-right: 36px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .inputContainer .micIcon {
+        right: 8px;
+    }
+
+    .steps {
+        padding: 8px 0;
+        gap: 8px;
+    }
+
+    .step {
+        padding: 4px;
+    }
+
+    .step span {
+        margin: 2px 0;
+    }
+}
