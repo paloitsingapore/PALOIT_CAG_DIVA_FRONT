@@ -32,7 +32,6 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId }) => {
 
     try {
       const newScene = new Scene(sceneOptions);
-      await newScene.connect();
 
       const smwebsdkOnMessage = newScene.onMessage.bind(newScene);
 
@@ -53,12 +52,12 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId }) => {
           }]);
         }
       };
+      await newScene.connect();
 
       setScene(newScene);
 
       // Initialize persona
       const newPersona = new Persona(newScene, personaId);
-      newPersona.conversationSend('Hello', {}, {});
       setPersona(newPersona);
 
       console.log('Scene and Persona initialized with personaId:', personaId);
@@ -78,6 +77,18 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId }) => {
       }
     };
   }, [personaId]);
+
+  // send initial message to persona
+  useEffect(() => {
+    if (persona) {
+      console.log('sending initial message to persona');
+      persona.conversationSend('', {}, {kind: 'init'}).then(() => {
+        console.log('initial message sent');
+      }).catch((error) => {
+        console.error('failed to send initial message:', error);
+      });
+    }
+  }, [persona]);
 
   return (
     <div className="flex-grow relative">
