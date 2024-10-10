@@ -101,7 +101,8 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId }) => {
         margin: '20px',
       }}
     >
-      <video
+
+      <Help children={(<video
         id="avatar"
         style={{
           flex: 1,
@@ -109,9 +110,8 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId }) => {
         ref={videoRef}
         autoPlay
         playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      <Help />
+        className="absolute inset-0 w-100 h-100 object-cover"
+      />)} />
     </div>
   );
 };

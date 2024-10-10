@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import styles from '@AssistedWayinding/styles/Help.module.css';
 import { Mic } from 'lucide-react';
 import mockData from '../../data/mockCard.json'; // Import the mock data
@@ -23,7 +23,12 @@ const formatGateName = (gateName: string) => {
         .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
         .join(' ');
 };
-export default function Help() {
+
+interface HelpProps {
+    children?: ReactNode;
+}
+
+export default function Help({ children }: HelpProps) {
     const [actions, setActions] = useState<Action[]>([]);
     const [showGateInfo, setShowGateInfo] = useState(false);
     const [gateInfo, setGateInfo] = useState<GateInfo | null>(null);
@@ -54,7 +59,7 @@ export default function Help() {
             try {
                 const response = await fetch(
                     'https://ed5zq5eya8.execute-api.ap-southeast-1.amazonaws.com/prod//directions/checkin/' +
-                        option,
+                    option,
                 );
                 const data: GateInfo = await response.json();
                 setGateInfo(data);
@@ -68,6 +73,7 @@ export default function Help() {
 
     return (
         <div className={styles.container}>
+            {children && <div className={styles.videoWrapper}>{children}</div>}
             <div className={styles.dialogBox}>
                 {!showGateInfo ? (
                     <>
