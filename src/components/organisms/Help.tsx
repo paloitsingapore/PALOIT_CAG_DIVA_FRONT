@@ -78,6 +78,16 @@ export default function Help({ children, transcript }: HelpProps) {
             {children && <div className={styles.videoWrapper}>{children}</div>}
             <div className={styles.dialogBox}>
                 <Transcript transcript={transcript ?? []} />
+                <div className={styles.inputContainer}>
+                    <input
+                        type="text"
+                        className={styles.input}
+                        placeholder="Speak or type your question here for Mei to assist you"
+                    />
+                    <div className={styles.micIcon}>
+                        <Mic size={24} color="#A645A6" />
+                    </div>
+                </div>
             </div>
         </div>
     );
