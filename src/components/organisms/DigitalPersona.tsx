@@ -3,28 +3,31 @@ import { Persona, Scene } from '@soulmachines/smwebsdk';
 import { TranscriptEntry } from '@AssistedWayinding/components/molecules/Transcript';
 import Help from '@AssistedWayinding/components/organisms/Help';
 import styles from '@AssistedWayinding/styles/Help.module.css';
+import { PassengerData } from '@AssistedWayinding/app/page';
 
 const apiKey = process.env.NEXT_PUBLIC_APP_API_KEY;
 
 interface DigitalPersonaProps {
   personaId: string;
   disableAvatar?: boolean;
+  user?: PassengerData;
 }
 
-const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId, disableAvatar }) => {
+const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId, disableAvatar, user }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [scene, setScene] = useState<Scene | null>(null);
   const [transcript, setTranscript] = useState<TranscriptEntry[]>([]);
   const [persona, setPersona] = useState<Persona | null>(null);
-  const [lastMessage, setLastMessage] = useState<string | null>(null);
 
   const handleMessage = (message: any) => {
     // Handle incoming messages and update transcript
     if (message.name === 'personaResponse') {
+      console.log(`Message: ${JSON.stringify(message)}`);
       if (message.body.currentSpeech) {
         addToTranscript('persona', message.body.currentSpeech);
       }
     } else if (message.name === 'recognizeResults') {
+      console.log(`Message: ${JSON.stringify(message)}`);
       if (message.body.results && message.body.results[0] && message.body.results[0].final) {
         const transcript = message.body.results[0].alternatives[0].transcript;
         if (transcript) {
@@ -37,6 +40,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId, disableAvata
   const initializeSceneAndPersona = useCallback(async () => {
     // Disconnect existing scene if it exists
     if (scene) {
+      scene.onMessage = () => { };
       scene.disconnect();
     }
 
@@ -70,16 +74,21 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId, disableAvata
   }, [personaId, videoRef]);
 
   const addToTranscript = useCallback((source: 'user' | 'persona', text: string) => {
-    const lowerCaseText = text.toLowerCase();
-    if (lowerCaseText !== lastMessage?.toLowerCase()) {
-      setTranscript(prev => [...prev, {
-        source,
-        text,
-        timestamp: new Date().toISOString()
-      }]);
-      setLastMessage(lowerCaseText);
-    }
-  }, [lastMessage]);
+    setTranscript(prev => {
+      const lowerCaseText = text.toLowerCase();
+      const lastEntry = prev[prev.length - 1];
+
+      if (!lastEntry || lowerCaseText !== lastEntry.text.toLowerCase()) {
+        return [...prev, {
+          source,
+          text,
+          timestamp: new Date().toISOString()
+        }];
+      }
+
+      return prev;
+    });
+  }, []);
 
   useEffect(() => {
     console.log('personaId changed:', personaId);
@@ -96,14 +105,14 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId, disableAvata
 
   // send initial message to persona
   useEffect(() => {
-    if (!disableAvatar && persona && personaId !== 'unknown') {
+    if (!disableAvatar && persona && personaId !== 'unknown' && user) {
       setTranscript([]);
-      persona.conversationSend('Hello', {}, {}).then(() => {
+      persona.conversationSend(`Hello, my name is ${user.name}`, {}, { age: user.age, gender: user.gender }).then(() => {
       }).catch((error) => {
         console.error('failed to send initial message:', error);
       });
     }
-  }, [persona]);
+  }, [persona, user]);
 
   const handleSendMessage = (message: string) => {
     persona?.conversationSend(message, {}, { kind: 'message' });

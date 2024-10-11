@@ -5,7 +5,7 @@ import DigitalPersona from '@AssistedWayinding/components/organisms/DigitalPerso
 import FaceDetectionComponent from '@AssistedWayinding/components/organisms/FaceDetection';
 import { Wifi, Smartphone } from 'lucide-react';
 
-interface PassengerData {
+export interface PassengerData {
   rekognition_collection_id: string;
   userId: string;
   imageUrls: string[];
@@ -25,6 +25,7 @@ export default function Home() {
   const [faceDetectionStartTime, setFaceDetectionStartTime] = useState<number | null>(null);
   const [imageSent, setImageSent] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const [user, setUser] = useState<PassengerData | undefined>(undefined);
 
   const sendImageToAPI = useCallback(async (base64Image: string) => {
     if (!imageSent) {
@@ -40,6 +41,7 @@ export default function Home() {
         const data: FaceRecognitionResponse = await response.json();
 
         setPersonaId(data.passengerData.userId);
+        setUser(data.passengerData);
       } catch (error) {
         console.error('Error sending image to API:', error);
       }
@@ -72,7 +74,7 @@ export default function Home() {
       }}
     >
       <FaceDetectionComponent onFaceDetected={handleFaceDetected} />
-      <DigitalPersona personaId={personaId} disableAvatar={true} />
+      <DigitalPersona personaId={personaId} disableAvatar={true} user={user} />
       <div className="p-4 sm:p-6 md:p-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
         <div className="w-full sm:w-1/2 max-w-md bg-purple-600 rounded-2xl overflow-hidden flex">
           <div className="bg-fuchsia-700 p-4 flex items-center justify-center">
