@@ -105,6 +105,11 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId, disableAvata
     }
   }, [persona]);
 
+  const handleSendMessage = (message: string) => {
+    persona?.conversationSend(message, {}, { kind: 'message' });
+    setTranscript(prev => [...prev, { source: 'user', text: message, timestamp: new Date().toISOString() }]);
+  };
+
   return (
     <div
       className={styles.backgroundImage}
@@ -140,7 +145,9 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId, disableAvata
             { key: '10', source: "user", text: "Perfect, thanks for your help!", timestamp: new Date().toISOString() },
             ...transcript
           ]
-        } />
+        }
+        onSendMessage={handleSendMessage}
+      />
     </div>
   );
 };
