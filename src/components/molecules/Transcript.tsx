@@ -22,7 +22,7 @@ const Transcript: React.FC<TranscriptProps> = ({ transcript }) => {
   }, [transcript]);
 
   return (
-    <div ref={scrollRef} className={`overflow-y-scroll max-h-[40vh] md:max-h-full w-full space-y-4 p-4`}>
+    <div ref={scrollRef} className={`overflow-y-scroll max-h-[70vh] w-full space-y-4 p-4`}>
       {transcript.map(({ source, text, timestamp, key }, index) => (
         <div key={key ?? timestamp} className={`flex ${source === 'user' ? 'justify-end' : 'justify-start'}`}>
           <div className={`max-w-[70%] rounded-lg p-3 ${source === 'user'

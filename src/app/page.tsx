@@ -72,7 +72,7 @@ export default function Home() {
       }}
     >
       <FaceDetectionComponent onFaceDetected={handleFaceDetected} />
-      <DigitalPersona personaId={personaId} />
+      <DigitalPersona personaId={personaId} disableAvatar={true} />
       <div className="p-4 sm:p-6 md:p-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
         <div className="w-full sm:w-1/2 max-w-md bg-purple-600 rounded-2xl overflow-hidden flex">
           <div className="bg-fuchsia-700 p-4 flex items-center justify-center">
