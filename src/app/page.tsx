@@ -68,7 +68,7 @@ export default function Home() {
         display: 'flex',
         flexDirection: 'column',
         height: '100vh',
-        backgroundColor: '#6A1B9A',
+        backgroundColor: '#3E005B',
       }}
     >
       <FaceDetectionComponent onFaceDetected={handleFaceDetected} />

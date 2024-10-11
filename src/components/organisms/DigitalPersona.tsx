@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Persona, Scene } from '@soulmachines/smwebsdk';
 import { TranscriptEntry } from '@AssistedWayinding/components/molecules/Transcript';
 import Help from '@AssistedWayinding/components/organisms/Help';
@@ -15,6 +15,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId }) => {
   const [scene, setScene] = useState<Scene | null>(null);
   const [transcript, setTranscript] = useState<TranscriptEntry[]>([]);
   const [persona, setPersona] = useState<Persona | null>(null);
+  const [lastMessage, setLastMessage] = useState<string | null>(null);
 
   const initializeSceneAndPersona = async () => {
     if (!videoRef.current) return;
@@ -41,17 +42,16 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId }) => {
         smwebsdkOnMessage(message);
         // Handle incoming messages and update transcript
         if (message.name === 'personaResponse') {
-          setTranscript(prev => [...prev, {
-            source: 'persona',
-            text: message.body.currentSpeech,
-            timestamp: new Date().toISOString()
-          }]);
+          if (message.body.currentSpeech) {
+            addToTranscript('persona', message.body.currentSpeech);
+          }
         } else if (message.name === 'recognizeResults') {
-          setTranscript(prev => [...prev, {
-            source: 'user',
-            text: message.body.results[0].alternatives[0].transcript,
-            timestamp: new Date().toISOString()
-          }]);
+          if (message.body.results && message.body.results[0] && message.body.results[0].final) {
+            const transcript = message.body.results[0].alternatives[0].transcript;
+            if (transcript) {
+              addToTranscript('user', transcript);
+            }
+          }
         }
       };
       await newScene.connect();
@@ -69,6 +69,18 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId }) => {
     }
   };
 
+  const addToTranscript = useCallback((source: 'user' | 'persona', text: string) => {
+    const lowerCaseText = text.toLowerCase();
+    if (lowerCaseText !== lastMessage?.toLowerCase()) {
+      setTranscript(prev => [...prev, {
+        source,
+        text,
+        timestamp: new Date().toISOString()
+      }]);
+      setLastMessage(lowerCaseText);
+    }
+  }, [lastMessage]);
+
   useEffect(() => {
     console.log('personaId changed:', personaId);
     initializeSceneAndPersona();
@@ -82,9 +94,10 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId }) => {
 
   // send initial message to persona
   useEffect(() => {
-    if (persona) {
+    if (persona && personaId !== 'unknown') {
       console.log('sending initial message to persona');
-      persona.conversationSend('', {}, { kind: 'init' }).then(() => {
+      setTranscript([]);
+      persona.conversationSend('Hello', {}, {}).then(() => {
         console.log('initial message sent');
       }).catch((error) => {
         console.error('failed to send initial message:', error);
@@ -111,7 +124,27 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({ personaId }) => {
         autoPlay
         playsInline
         className="absolute inset-0 w-100 h-100 object-cover"
-      />)} />
+      />)}
+        transcript={
+
+          [
+            // { key: '1', source: "persona", text: "Hello, how can I assist you today?", timestamp: new Date().toISOString() },
+            // { key: '2', source: "user", text: "Hello", timestamp: new Date().toISOString() },
+            // { key: '1', source: "persona", text: "Hello, how can I assist you today?", timestamp: new Date().toISOString() },
+            // { key: '2', source: "user", text: "Hello", timestamp: new Date().toISOString() },
+            // { key: '1', source: "persona", text: "Hello, how can I assist you today?", timestamp: new Date().toISOString() },
+            // { key: '2', source: "user", text: "Hello", timestamp: new Date().toISOString() },
+            // { key: '1', source: "persona", text: "Hello, how can I assist you today?", timestamp: new Date().toISOString() },
+            // { key: '2', source: "user", text: "Hello", timestamp: new Date().toISOString() },
+            // { key: '1', source: "persona", text: "Hello, how can I assist you today?", timestamp: new Date().toISOString() },
+            // { key: '2', source: "user", text: "Hello", timestamp: new Date().toISOString() },
+            // { key: '1', source: "persona", text: "Hello, how can I assist you today?", timestamp: new Date().toISOString() },
+            // { key: '2', source: "user", text: "Hello", timestamp: new Date().toISOString() },
+            // { key: '1', source: "persona", text: "Hello, how can I assist you today?", timestamp: new Date().toISOString() },
+            // { key: '2', source: "user", text: "Hello", timestamp: new Date().toISOString() },
+            ...transcript
+          ]
+        } />
     </div>
   );
 };
