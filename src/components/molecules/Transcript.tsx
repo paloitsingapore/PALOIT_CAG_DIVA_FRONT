@@ -7,6 +7,12 @@ export interface TranscriptEntry {
   text: string;
   timestamp: string;
   key?: string;
+  message?: any;
+  attributes?: { [key: string]: any[] };
+  options?: {
+    name: string;
+    action?: string;
+  }[]
 }
 
 interface TranscriptProps {
@@ -38,14 +44,32 @@ const Transcript: React.FC<TranscriptProps> = ({ transcript, onSendMessage }) =>
   return (
     <>
       <div ref={scrollRef} className={`overflow-y-scroll max-h-[70vh] w-full space-y-4 p-4`}>
-        {transcript.map(({ source, text, timestamp, key }, index) => (
-          <div key={key ?? timestamp} className={`flex ${source === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[70%] rounded-lg p-3 ${source === 'user'
-              ? `${styles.chatBubble} ${styles.userMessage} bg-blue-500 text-white rounded-br-none`
-              : `${styles.chatBubble} ${styles.systemMessage} bg-gray-200 text-black rounded-bl-none`
-              }`}>
-              <div>{text}</div>
+        {transcript.map(({ source, text, timestamp, key, attributes, options, message }, index) => (
+          <div key={key ?? timestamp} className="flex flex-col">
+            <div className={`flex ${source === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div className={`max-w-[70%] rounded-lg p-3 ${source === 'user'
+                ? `${styles.chatBubble} ${styles.userMessage} bg-blue-500 text-white rounded-br-none`
+                : `${styles.chatBubble} ${styles.systemMessage} bg-gray-200 text-black rounded-bl-none`
+                }`}>
+                <div>{text}</div>
+                {attributes && attributes['image'] && attributes['image'].map((image, index) => (
+                  <img key={index} src={image} alt="Persona" />
+                ))}
+              </div>
             </div>
+            {options && options.length > 0 && (
+              <div className="grid grid-cols-2 gap-2 mt-2">
+                {options.map((option, optionIndex) => (
+                  <button
+                    key={optionIndex}
+                    className="p-2 text-center rounded-lg bg-purple-100 text-purple-800"
+                    onClick={() => onSendMessage(option.action || option.name)}
+                  >
+                    {option.name}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         ))}
       </div>
