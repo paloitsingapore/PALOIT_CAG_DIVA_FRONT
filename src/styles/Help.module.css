@@ -8,6 +8,8 @@
 .dialogBox {
     position: relative;
     z-index: 1;
+    width: 50%;
+    margin-left: auto;
     /* background-color: #333; */
     color: white;
     padding: 20px;
@@ -93,7 +95,7 @@
     gap: 8px;
     width: 512px;
     border-radius: 32px 32px 32px 32px;
-    background-color: #3E005B;
+    background-color: #3e005b;
 }
 
 .step {
@@ -201,7 +203,7 @@
     gap: 8px;
     border-radius: 32px 32px 32px 4px;
     opacity: 0px;
-    background-color: #3E005B;
+    background-color: #3e005b;
     padding: 16px;
     /* Optional: Add padding for better appearance */
     color: white;
@@ -210,16 +212,16 @@
 
 .chatBubble {
     font-family: Hind;
-    font-size: 40px;
+    font-size: 20px;
     font-weight: 400;
-    line-height: 52px;
+    line-height: 26px;
     letter-spacing: 0.02em;
     text-align: left;
     width: Fixed (516px) px;
     height: Hug (152px) px;
     top: 123px;
     left: 562px;
-    padding: 24px 32px 24px 32px;
+    /* padding: 24px 32px 24px 32px; */
     gap: 8px;
     opacity: 0px;
     padding: 16px;
@@ -229,7 +231,7 @@
 }
 
 .systemMessage {
-    background-color: #3E005B;
+    background-color: #3e005b;
     border-radius: 32px 32px 32px 4px;
 }
 
@@ -338,7 +340,7 @@
         gap: 8px;
         width: 100%;
         border-radius: 32px 32px 32px 32px;
-        background-color: #3E005B;
+        background-color: #3e005b;
     }
 
     .mapHeaderBox {
@@ -438,7 +440,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 50%;
     height: 100%;
     z-index: 0;
 }
@@ -448,4 +450,10 @@
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .dialogBox {
+        width: auto;
+    }
 }
