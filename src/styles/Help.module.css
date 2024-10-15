@@ -7,6 +7,8 @@
 
 .dialogBox {
     position: relative;
+    display: flex;
+    flex-direction: column;
     z-index: 1;
     width: 50%;
     margin-left: auto;
@@ -116,7 +118,6 @@
 
 .backgroundImage {
     display: flex;
-    background-image: url('../public/images/bg_image.png');
     background-size: cover;
     background-position: center;
     flex-direction: row;
@@ -212,9 +213,9 @@
 
 .chatBubble {
     font-family: Hind;
-    font-size: 20px;
+    font-size: 48px;
     font-weight: 400;
-    line-height: 26px;
+    line-height: 62.4px;
     letter-spacing: 0.02em;
     text-align: left;
     width: Fixed (516px) px;
@@ -231,12 +232,20 @@
 }
 
 .systemMessage {
-    background-color: #3e005b;
+    background-color: #cf0176;
+
     border-radius: 32px 32px 32px 4px;
 }
-
+.fontHind {
+    font-family: Hind;
+    font-weight: 500;
+    font-size: 56px;
+    line-height: 72.8px;
+}
 .userMessage {
-    background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+    background-color: #b1dcf5;
+    color: #2e0055;
+
     border-radius: 32px 32px 4px 32px;
 }
 
@@ -297,8 +306,6 @@
 .inputContainer {
     position: relative;
     width: 100%;
-    max-width: 509px;
-    height: 45px;
     margin-top: 16px;
 }
 
@@ -452,8 +459,20 @@
     border-radius: 10px;
 }
 
+.chatBubbleImage {
+    justify-content: start;
+}
+
 @media screen and (max-width: 600px) {
     .dialogBox {
         width: auto;
+    }
+
+    .videoWrapper {
+        display: none;
+    }
+
+    .avatar {
+        display: none;
     }
 }
