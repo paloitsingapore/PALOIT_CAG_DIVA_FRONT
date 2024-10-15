@@ -175,6 +175,15 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
             console.error('Failed to initialize scene:', error);
         }
     }, [personaId, videoRef]);
+    const handleEndConversation = () => {
+        setTranscript([]); // Clear the transcript
+        initializeSceneAndPersona(); // Reload the scene and persona
+        // Call the parent function to clear the transcript
+    };
+
+    useEffect(() => {
+        initializeSceneAndPersona();
+    }, []);
 
     const addToTranscript = useCallback(
         (
@@ -296,6 +305,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                         <div>
                             {videoLoaded && (
                                 <button
+                                    onClick={handleEndConversation}
                                     className="absolute top-4 left-4 bg-white text-black px-4 py-2 rounded-full text-sm font-semibold "
                                     style={{
                                         zIndex: 1,

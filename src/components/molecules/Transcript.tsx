@@ -49,7 +49,7 @@ const Transcript: React.FC<TranscriptProps> = ({
                 ref={scrollRef}
                 /* max-h-[70vh] */
                 className={`overflow-y-scroll  w-full space-y-4 p-4`}
-                style={{ flexGrow: 1 }}
+                style={{ flexGrow: 1, height: '80vh' }}
             >
                 {transcript.map(
                     (
