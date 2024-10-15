@@ -58,9 +58,21 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
               attributes['image'] = ['https://i.imgur.com/TecKia9.png'];
             }
 
+            // if wheelchair, add image
+            const wheelchairRegex = /\b(?=.*wheelchair).*\b/i;
+            if (wheelchairRegex.test(message.body.currentSpeech)) {
+              attributes['image'] = ['https://i.imgur.com/e5afI8w.png'];
+            }
+
+            // if "level 1", add image
+            const level1Regex = /\b(?=.*level)(?=.*1).*\b/i;
+            if (level1Regex.test(message.body.currentSpeech)) {
+              attributes['image'] = ['https://i.imgur.com/hbXx2ge.png'];
+            }
+
             // if transcript is empty, add options
             const options = [];
-            if (transcriptLengthRef.current === 0 && personaId !== 'unknown') {
+            if (transcriptLengthRef.current === 0 && !user) {
               options.push({
                 name: 'Airport Lounges',
               },
@@ -71,6 +83,24 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
               }, {
                 name: 'Changi Airport Attractions'
               });
+            } else if (transcriptLengthRef.current === 0 && user) {
+              if (user.accessibilityPreferences.wheelchairAccessibility) {
+                options.push({
+                  name: 'Wheelchair Assistance',
+                });
+              }
+              if (user.has_lounge_access) {
+                options.push({
+                  name: `Lounge ${user.lounge_name}`,
+                  action: `How to get to lounge ${user.lounge_name}`,
+                });
+              }
+              if (user.gate) {
+                options.push({
+                  name: `Gate ${user.gate}`,
+                  acction: `How to get to gate ${user.gate}`,
+                });
+              }
             }
             addToTranscript('persona', message.body.currentSpeech, attributes, options, message);
           }
@@ -161,9 +191,22 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
       transcriptLengthRef.current = 0;
       persona
         .conversationSend(
-          `Hello, my name is ${user.name}`,
-          {},
-          { age: user.age, gender: user.gender },
+          `Hello, my name is ${user.name} and these are my flight details: ${JSON.stringify(user)}. You don't have to repeat them unless I ask you to.`,
+          {
+            dateOfBirth: user.dateOfBirth,
+            hasLoungeAccess: user.has_lounge_access,
+            nextFlightId: user.next_flight_id,
+            passengerId: user.passengerId,
+            rekognitionCollectionId: user.rekognition_collection_id,
+            userId: user.userId,
+            changiAppUserId: user.changi_app_user_id,
+            language: user.language,
+            gate: user.gate,
+            loungeName: user.lounge_name,
+            airline: user.airline,
+          },
+          {
+          },
         )
         .then(() => { })
         .catch((error) => {
@@ -173,9 +216,17 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
   }, [persona, user]);
 
   const handleSendMessage = (message: string) => {
-    persona?.conversationSend(message, {}, {});
-
-    addToTranscript('user', message);
+    console.log('send message message:', message);
+    // find every 'user' transcript entry
+    const userTranscript = transcript.find((entry) => entry.source === 'user');
+    if (!userTranscript) {
+      message = 'Hello, ' + message;
+    }
+    persona!.conversationSend(message, {}, {}).then(() => {
+      addToTranscript('user', message);
+    }).catch((error) => {
+      console.error('failed to send message:', error);
+    });
   };
 
   return (
