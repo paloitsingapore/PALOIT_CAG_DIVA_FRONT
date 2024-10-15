@@ -292,7 +292,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
       style={{
         flexGrow: 1,
         borderRadius: '24px 24px 24px 24px',
-        margin: '20px',
+        margin: '80px',
       }}
     >
       <Help

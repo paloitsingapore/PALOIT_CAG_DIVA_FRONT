@@ -6,6 +6,8 @@ import FaceDetectionComponent from '@AssistedWayinding/components/organisms/Face
 import { Wifi } from 'lucide-react';
 import phoneIcon from '@AssistedWayinding/public/images/phone_icon.svg';
 import styles from '@AssistedWayinding/styles/Help.module.css';
+import { API_ENDPOINTS } from '@AssistedWayinding/config/apiConfig';
+
 export interface PassengerData {
   changi_app_user_id: string;
   passengerId: string;
@@ -33,7 +35,7 @@ interface FaceRecognitionResponse {
   passengerData: PassengerData;
 }
 
-export default function Home() {
+const Page: React.FC = () => {
   const [personaId, setPersonaId] = useState<string>('unknown');
   const [faceDetectionStartTime, setFaceDetectionStartTime] = useState<
     number | null
@@ -50,7 +52,7 @@ export default function Home() {
         try {
           setImageSent(true);
           const response = await fetch(
-            'https://ijiv62tdzd.execute-api.ap-southeast-2.amazonaws.com/prod/recognize',
+            API_ENDPOINTS.RECOGNIZE,
             {
               method: 'POST',
               body: JSON.stringify({ image: base64Image }),
@@ -113,7 +115,10 @@ export default function Home() {
       />
 
       <div
-        className={`p-4 sm:p-6 md:p-8 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 bg-purple-950 ${styles.fontHind}`}
+        className={` flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 bg-purple-950 ${styles.fontHind}`}
+        style={{
+          padding: '0 80px 80px 80px',
+        }}
       >
         <div
           className="bg-purple-700 w-full sm:w-1/2 bg-purple-600 rounded-3xl overflow-hidden flex"
@@ -187,4 +192,6 @@ export default function Home() {
       </div>
     </div>
   );
-}
+};
+
+export default Page;

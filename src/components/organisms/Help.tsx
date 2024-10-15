@@ -2,6 +2,7 @@ import React, { useState, useEffect, ReactNode } from 'react';
 import styles from '@AssistedWayinding/styles/Help.module.css';
 import mockData from '../../data/mockCard.json'; // Import the mock data
 import Transcript, { TranscriptEntry } from '../molecules/Transcript';
+import { API_ENDPOINTS } from '@AssistedWayinding/config/apiConfig';
 interface Action {
     action_type: string;
     action_target: string;
@@ -55,23 +56,6 @@ export default function Help({ children, transcript, onSendMessage }: HelpProps)
 
         fetchActions();
     }, []);
-
-    const handleOptionClick = async (option: string) => {
-        if (option.startsWith('Gate')) {
-            try {
-                const response = await fetch(
-                    'https://ed5zq5eya8.execute-api.ap-southeast-1.amazonaws.com/prod//directions/checkin/' +
-                    option,
-                );
-                const data: GateInfo = await response.json();
-                setGateInfo(data);
-                setShowGateInfo(true);
-            } catch (error) {
-                console.error('Error fetching gate info:', error);
-            }
-        }
-        // Logic for other options can go here.
-    };
 
     return (
         <div className={styles.container}>
