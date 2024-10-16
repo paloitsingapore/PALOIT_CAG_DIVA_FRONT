@@ -336,6 +336,130 @@
     flex: 1;
 }
 
+.flexContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 5rem;
+    background-color: #2e0055;
+    font-family: 'Hind', sans-serif;
+}
+
+.bottomCard {
+    width: 1258px;
+    height: 315px;
+    background-color: #6b2ba0;
+    border-radius: 64px;
+    display: flex;
+    overflow: hidden;
+}
+
+.bottomCardSection {
+    width: 303px;
+    height: 315px;
+    border-right: 2px solid #2e0055;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bottomCardicon {
+    width: 124px;
+    height: 112px;
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.bottomCardTextLarge {
+    font-size: 48px;
+    line-height: 58px;
+    color: white;
+    font-weight: 500;
+}
+
+.bottomCardTextMedium {
+    font-size: 56px;
+    line-height: 72px;
+    color: white;
+    font-weight: 500;
+    width: 859px;
+    height: 137px;
+}
+
+.bottomCardSvgIcon {
+    margin-bottom: 1.5rem;
+    width: 68px;
+    height: 112px;
+}
+
+.backgroundContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(62, 0, 91);
+    height: '100vh';
+}
+@media (width: 2732px) and (height: 2048px) {
+    .flexContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 5rem;
+        background-color: #2e0055;
+        font-family: 'Hind', sans-serif;
+    }
+
+    .bottomCard {
+        width: 1258px;
+        height: 315px;
+        background-color: #6b2ba0;
+        border-radius: 64px;
+        display: flex;
+        overflow: hidden;
+    }
+
+    .bottomCardSection {
+        width: 303px;
+        height: 315px;
+        border-right: 2px solid #2e0055;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bottomCardicon {
+        width: 124px;
+        height: 112px;
+        color: white;
+        margin-bottom: 1.5rem;
+    }
+
+    .bottomCardTextLarge {
+        font-size: 48px;
+        line-height: 58px;
+        color: white;
+        font-weight: 500;
+    }
+
+    .bottomCardTextMedium {
+        font-size: 56px;
+        line-height: 72px;
+        color: white;
+        font-weight: 500;
+        width: 859px;
+        height: 137px;
+    }
+
+    .bottomCardSvgIcon {
+        margin-bottom: 1.5rem;
+        width: 68px;
+        height: 112px;
+    }
+}
+
 /* Media Queries for Mobile Responsiveness */
 @media (max-width: 600px) {
     .mapImage {
