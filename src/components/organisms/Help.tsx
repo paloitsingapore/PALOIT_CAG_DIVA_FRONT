@@ -31,7 +31,11 @@ interface HelpProps {
     onSendMessage: (message: string) => void;
 }
 
-export default function Help({ children, transcript, onSendMessage }: HelpProps) {
+export default function Help({
+    children,
+    transcript,
+    onSendMessage,
+}: HelpProps) {
     const [actions, setActions] = useState<Action[]>([]);
     const [showGateInfo, setShowGateInfo] = useState(false);
     const [gateInfo, setGateInfo] = useState<GateInfo | null>(null);
@@ -40,7 +44,11 @@ export default function Help({ children, transcript, onSendMessage }: HelpProps)
         // Fetch data from the API
         const fetchActions = async () => {
             try {
-                const response = await fetch('YOUR_API_ENDPOINT');
+                if (typeof YOUR_API_ENDPOINT === 'undefined') {
+                    setActions(mockData);
+                    return;
+                }
+                const response = await fetch(YOUR_API_ENDPOINT);
                 const data = await response.json();
                 if (data && data.length > 0) {
                     setActions(data);
@@ -61,7 +69,10 @@ export default function Help({ children, transcript, onSendMessage }: HelpProps)
         <div className={styles.container}>
             {children && <div className={styles.videoWrapper}>{children}</div>}
             <div className={styles.dialogBox}>
-                <Transcript transcript={transcript ?? []} onSendMessage={onSendMessage} />
+                <Transcript
+                    transcript={transcript ?? []}
+                    onSendMessage={onSendMessage}
+                />
             </div>
         </div>
     );
