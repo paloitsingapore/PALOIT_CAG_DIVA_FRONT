@@ -1,0 +1,17 @@
+{
+    "inputPlaceholder": "Speak or type your question here for Mei to assist you",
+    "wifiTitle": "Wi-Fi",
+    "wifiDescription": "Tap your phone below to connect to our free Wi-Fi",
+    "downloadTitle": "Download",
+    "downloadDescription": "Tap your phone below to continue receiving assistance from Mei",
+    "accessibilityServices": "Accessibility Services",
+    "dutyFreeShopping": "Duty-Free Shopping",
+    "changiAirportAttractions": "Changi Airport Attractions",
+    "wheelchairAssistance": "Wheelchair Assistance",
+    "howToGetToLounge": "How to get to lounge {{loungeName}}",
+    "lounge": "Lounge {{loungeName}}",
+    "howToGetToGate": "How to get to gate {{gate}}",
+    "gate": "Gate {{gate}}",
+    "loungeName": "{{loungeName}}",
+    "gateName": "{{gate}}"
+}

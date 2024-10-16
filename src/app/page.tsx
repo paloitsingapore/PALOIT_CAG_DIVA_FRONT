@@ -5,6 +5,8 @@ import DigitalPersona from '@AssistedWayinding/components/organisms/DigitalPerso
 import { Wifi } from 'lucide-react';
 import phoneIcon from '@AssistedWayinding/public/images/phone_icon.svg';
 import styles from '@AssistedWayinding/styles/Help.module.css';
+import './i18n';
+import { useTranslation } from 'react-i18next';
 
 import {
     API_ENDPOINTS,
@@ -47,6 +49,7 @@ interface FaceRecognitionResponse {
 }
 
 const Page: React.FC = () => {
+    const { t, i18n } = useTranslation();
     const [personaId, setPersonaId] = useState<string>('unknown');
     const [faceDetectionStartTime, setFaceDetectionStartTime] = useState<
         number | null
@@ -73,6 +76,7 @@ const Page: React.FC = () => {
                     // }
                     setPersonaId(data.passengerData.userId);
                     setUser(data.passengerData);
+                    i18n.changeLanguage(data.passengerData.language);
                 } catch (error) {
                     console.error('Error sending image to API:', error);
                 }
@@ -130,12 +134,12 @@ const Page: React.FC = () => {
                     <div className={styles.bottomCardSection}>
                         <Wifi className={styles.bottomCardicon} />
                         <span className={styles.bottomCardTextLarge}>
-                            Wi-Fi
+                            {t('wifiTitle')}
                         </span>
                     </div>
                     <div className="flex-grow flex items-center justify-center">
                         <p className={styles.bottomCardTextMedium}>
-                            Tap your phone below to connect to our free Wi-Fi
+                            {t('wifiDescription')}
                         </p>
                     </div>
                 </div>
@@ -153,13 +157,12 @@ const Page: React.FC = () => {
                             />
                         </svg>
                         <span className={styles.bottomCardTextLarge}>
-                            Download
+                            {t('downloadTitle')}
                         </span>
                     </div>
                     <div className="flex-grow flex items-center justify-center">
                         <p className={styles.bottomCardTextMedium}>
-                            Tap your phone below to continue receiving
-                            assistance from Mei
+                            {t('downloadDescription')}
                         </p>
                     </div>
                 </div>

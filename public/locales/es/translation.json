@@ -1,0 +1,17 @@
+{
+    "inputPlaceholder": "Habla o escribe tu pregunta aquí para que Mei te ayude",
+    "wifiTitle": "Wi-Fi",
+    "wifiDescription": "Toca tu teléfono abajo para conectarte a nuestro Wi-Fi gratuito",
+    "downloadTitle": "Descargar",
+    "downloadDescription": "Toca tu teléfono abajo para seguir recibiendo asistencia de Mei",
+    "accessibilityServices": "Servicios de Accesibilidad",
+    "dutyFreeShopping": "Shopping Duty-Free",
+    "changiAirportAttractions": "Atracciones de Changi Airport",
+    "wheelchairAssistance": "Asistencia para Sillas de Ruedas",
+    "howToGetToLounge": "Cómo llegar a la sala {{loungeName}}",
+    "lounge": "Sala {{loungeName}}",
+    "howToGetToGate": "Cómo llegar a la puerta {{gate}}",
+    "gate": "Puerta {{gate}}",
+    "loungeName": "{{loungeName}}",
+    "gateName": "{{gate}}"
+}

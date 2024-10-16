@@ -1,6 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styles from '@AssistedWayinding/styles/Help.module.css';
 import { Mic } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+
 export interface TranscriptEntry {
     source: 'user' | 'persona';
     text: string;
@@ -23,6 +25,7 @@ const Transcript: React.FC<TranscriptProps> = ({
     transcript,
     onSendMessage,
 }) => {
+    const { t } = useTranslation();
     const scrollRef = useRef<HTMLDivElement>(null);
     const [inputValue, setInputValue] = useState('');
 
@@ -158,7 +161,7 @@ const Transcript: React.FC<TranscriptProps> = ({
                 <input
                     type="text"
                     className={styles.input}
-                    placeholder="Speak or type your question here for Mei to assist you"
+                    placeholder={t('inputPlaceholder')}
                     value={inputValue}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}

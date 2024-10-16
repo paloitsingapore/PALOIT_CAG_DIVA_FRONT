@@ -4,6 +4,7 @@ import { TranscriptEntry } from '@AssistedWayinding/components/molecules/Transcr
 import Help from '@AssistedWayinding/components/organisms/Help';
 import styles from '@AssistedWayinding/styles/Help.module.css';
 import { PassengerData } from '@AssistedWayinding/app/page';
+import { useTranslation } from 'react-i18next';
 
 interface DigitalPersonaProps {
     personaId: string;
@@ -20,6 +21,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
     onEndConversation,
     apiKey,
 }) => {
+    const { t } = useTranslation();
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [scene, setScene] = useState<Scene | null>(null);
     const [transcript, setTranscript] = useState<TranscriptEntry[]>([]);
@@ -116,16 +118,16 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                         if (transcriptLengthRef.current === 0 && !user) {
                             options.push(
                                 {
-                                    name: 'Airport Lounges',
+                                    name: t('airportLounge'),
                                 },
                                 {
-                                    name: 'Accessibility Services',
+                                    name: t('accessibilityServices'),
                                 },
                                 {
-                                    name: 'Duty-Free Shopping',
+                                    name: t('dutyFreeShopping'),
                                 },
                                 {
-                                    name: 'Changi Airport Attractions',
+                                    name: t('changiAirportAttractions'),
                                 },
                             );
                         } else if (transcriptLengthRef.current === 0 && user) {
@@ -134,19 +136,27 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                                     .wheelchairAccessibility
                             ) {
                                 options.push({
-                                    name: 'Wheelchair Assistance',
+                                    name: t('wheelchairAssistance'),
                                 });
                             }
                             if (user.has_lounge_access) {
                                 options.push({
-                                    name: `Lounge ${user.lounge_name}`,
-                                    action: `How to get to lounge ${user.lounge_name}`,
+                                    name: t('lounge', {
+                                        name: user.lounge_name,
+                                    }),
+                                    action: t('howToGetToLounge', {
+                                        name: user.lounge_name,
+                                    }),
                                 });
                             }
                             if (user.gate) {
                                 options.push({
-                                    name: `Gate ${user.gate}`,
-                                    acction: `How to get to gate ${user.gate}`,
+                                    name: t('gate', {
+                                        name: user.gate,
+                                    }),
+                                    acction: t('howToGetToGate', {
+                                        name: user.gate,
+                                    }),
                                 });
                             }
                         }

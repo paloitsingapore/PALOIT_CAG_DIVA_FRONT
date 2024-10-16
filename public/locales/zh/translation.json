@@ -1,0 +1,16 @@
+{
+    "inputPlaceholder": "在此处说出或输入您的问题，让美帮助您",
+    "wifiTitle": "无线网络",
+    "wifiDescription": "点击下方的手机图标连接到我们的免费Wi-Fi",
+    "downloadTitle": "下载",
+    "downloadDescription": "点击下方的手机图标继续接收美的协助",
+    "accessibilityServices": "无障碍服务",
+    "dutyFreeShopping": "免税购物",
+    "changiAirportAttractions": "樟宜机场景点",
+    "wheelchairAssistance": "轮椅协助",
+    "howToGetToLounge": "如何到达休息室{{loungeName}}",
+    "lounge": "休息室{{loungeName}}",
+    "howToGetToGate": "如何到达登机口{{gate}}",
+    "gate": "登机口{{gate}}",
+    "loungeName": "{{loungeName}}"
+}
