@@ -62,7 +62,6 @@
     padding: 24px 0px 0px 0px;
     gap: 8px;
     border-radius: 24px 0px 0px 0px;
-    opacity: 0px;
 }
 
 .button:hover {
@@ -189,7 +188,6 @@
     gap: 0px;
     border-radius: 24px 0px 0px 0px;
     justify: space-between;
-    opacity: 0px;
 }
 
 .helpBox {
@@ -206,7 +204,6 @@
     padding: 24px 32px 24px 32px;
     gap: 8px;
     border-radius: 32px 32px 32px 4px;
-    opacity: 0px;
     background-color: #3e005b;
     padding: 16px;
     /* Optional: Add padding for better appearance */
@@ -242,7 +239,6 @@
     left: 562px;
     /* padding: 24px 32px 24px 32px; */
     gap: 8px;
-    opacity: 0px;
     padding: 48px;
     /* Optional: Add padding for better appearance */
     color: white;
@@ -283,7 +279,6 @@
     padding: 24px 32px 24px 32px;
     gap: 8px;
     border-radius: 32px 32px 32px 4px;
-    opacity: 0px;
     background-color: purple;
     /* padding: 16px; */
     color: white;
@@ -623,7 +618,6 @@
         padding: 24px 32px 24px 32px;
         gap: 8px;
         border-radius: 32px 32px 32px 4px !important;
-        opacity: 0px;
         font-family: Hind;
         font-size: 40px;
         font-weight: 400;
@@ -758,7 +752,6 @@
         padding: 24px 32px 24px 32px;
         gap: 8px;
         border-radius: 32px 32px 32px 4px;
-        opacity: 0px;
         background-color: purple;
         /* padding: 16px; */
         color: white;
