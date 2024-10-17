@@ -73,32 +73,15 @@ const Transcript: React.FC<TranscriptProps> = ({
                             >
                                 <div
                                     className={`w-full rounded-lg p-3 ${
-                                        source === 'user'
-                                            ? `${styles.chatBubble} ${styles.userMessage} bg-blue-500 text-white rounded-br-none`
-                                            : `${styles.chatBubble} ${styles.systemMessage} bg-gray-200 text-black rounded-bl-none`
-                                    }`}
-                                    style={
                                         options && options.length > 0
-                                            ? {
-                                                  fontSize: '96px',
-                                                  fontWeight: '400',
-                                                  fontFamily: 'Hind',
-                                                  lineHeight: '124.8px',
-                                                  maxWidth: 'max-content',
-                                                  marginRight: '30px',
-                                                  /* width: auto; */
-                                                  // width: Fixed(1, 258px) px;
-                                                  // height: Fixed(357px) px;
-                                                  top: '296px',
-                                                  left: '1394px',
-                                                  padding:
-                                                      '40px 56px 40px 56px',
-                                                  gap: '8px',
-                                                  borderRadius:
-                                                      '64px 64px 64px 8px',
-                                              }
-                                            : {}
+                                            ? `${styles.welcomeMessage}`
+                                            : `${styles.chatBubble}`
+                                    }   ${
+                                        source === 'user'
+                                            ? ` ${styles.userMessage} bg-blue-500 text-white rounded-br-none`
+                                            : ` ${styles.systemMessage} bg-gray-200 text-black rounded-bl-none`
                                     }
+                                    `}
                                 >
                                     <div>{text}</div>
                                 </div>

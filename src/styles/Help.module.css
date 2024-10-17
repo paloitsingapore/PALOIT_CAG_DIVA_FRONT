@@ -210,6 +210,20 @@
     color: white;
     /* Optional: Add text color for better readability */
 }
+.welcomeMessage {
+    font-size: 96px;
+    font-weight: 400;
+    font-family: Hind;
+    line-height: 124.8px;
+    max-width: max-content;
+    margin-right: 30px;
+    top: 296px;
+    left: 1394px;
+    padding: 40px 56px;
+    gap: 8px;
+    border-radius: 64px 64px 64px 8px !important;
+    color: white;
+}
 
 .chatBubble {
     margin-top: 32px;
@@ -457,6 +471,67 @@
         margin-bottom: 1.5rem;
         width: 68px;
         height: 112px;
+    }
+}
+
+@media (width: 1180px) and (height: 820px) {
+    .welcomeMessage {
+        width: Fixed (553px) px;
+        height: Hug (152px) px;
+        top: 111px;
+        left: 609px;
+        padding: 24px 32px 24px 32px;
+        gap: 8px;
+        border-radius: 32px 32px 32px 4px !important;
+        opacity: 0px;
+        font-family: Hind;
+        font-size: 40px;
+        font-weight: 400;
+        line-height: 52px;
+        letter-spacing: 0.02em;
+        text-align: left;
+        color: white;
+    }
+
+    .chatBubble {
+        margin-top: 32px;
+        font-family: Hind;
+        font-size: 48px;
+        font-weight: 400;
+        line-height: 62.4px;
+        letter-spacing: 0.02em;
+        text-align: left;
+        width: Fixed (516px) px;
+        height: Hug (152px) px;
+        top: 123px;
+        left: 562px;
+        /* padding: 24px 32px 24px 32px; */
+        gap: 8px;
+        opacity: 0px;
+        padding: 48px;
+        /* Optional: Add padding for better appearance */
+        color: white;
+        /* Optional: Add text color for better readability */
+    }
+
+    .systemMessage {
+        background-color: #cf0176;
+
+        border-radius: 32px 32px 32px 4px;
+    }
+
+    .fontHind {
+        font-family: Hind;
+        font-weight: 500;
+        font-size: 56px;
+        line-height: 72.8px;
+    }
+
+    .userMessage {
+        background-color: #b1dcf5;
+        color: #2e0055;
+
+        border-radius: 32px 32px 4px 32px;
     }
 }
 
