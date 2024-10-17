@@ -15,7 +15,9 @@ describe('Transcript', () => {
     ];
 
     it('renders transcript entries correctly', () => {
-        render(<Transcript transcript={mockTranscript} />);
+        render(
+            <Transcript transcript={mockTranscript} onSendMessage={() => {}} />,
+        );
 
         // Check if user message is rendered
         expect(screen.getByText('Hello')).toBeInTheDocument();

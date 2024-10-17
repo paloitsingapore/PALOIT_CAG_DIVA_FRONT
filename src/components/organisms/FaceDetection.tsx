@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import Webcam from 'react-webcam';
 import { CameraOptions, useFaceDetection } from 'react-use-face-detection';
 import FaceDetection from '@mediapipe/face_detection';
@@ -7,9 +7,9 @@ import { Camera } from '@mediapipe/camera_utils';
 const width = 500;
 const height = 500;
 
-interface FaceDetectionProps {
+type FaceDetectionProps = {
     onFaceDetected: (base64Image: string) => void;
-}
+};
 
 const FaceDetectionComponent: React.FC<FaceDetectionProps> = ({
     onFaceDetected,

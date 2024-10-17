@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef, Suspense } from 'react';
+import React from 'react';
 import DigitalPersona from '@AssistedWayinding/components/organisms/DigitalPersona';
 import { Wifi } from 'lucide-react';
 import styles from '@AssistedWayinding/styles/Help.module.css';
@@ -20,7 +21,7 @@ const FaceDetectionComponent = dynamic(
         ssr: false, // This will prevent server-side rendering
     },
 );
-export interface PassengerData {
+export type PassengerData = {
     changi_app_user_id: string;
     passengerId: string;
     imageUrls: string[];
@@ -40,12 +41,12 @@ export interface PassengerData {
     };
     faceIds: string[];
     airline: string;
-}
+};
 
-interface FaceRecognitionResponse {
+type FaceRecognitionResponse = {
     message: string;
     passengerData: PassengerData;
-}
+};
 
 const Home: React.FC = () => {
     const { t, i18n } = useTranslation();
@@ -113,10 +114,11 @@ const Home: React.FC = () => {
 
     return (
         <div
+            className={styles.homeLayout}
             style={{
                 display: 'flex',
                 flexDirection: 'column',
-                backgroundColor: 'rgb(62, 0, 91)',
+                backgroundColor: '#2e0055',
                 height: '100vh',
             }}
         >
