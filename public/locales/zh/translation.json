@@ -12,5 +12,6 @@
     "lounge": "休息室{{loungeName}}",
     "howToGetToGate": "如何到达登机口{{gate}}",
     "gate": "登机口{{gate}}",
-    "loungeName": "{{loungeName}}"
+    "loungeName": "{{loungeName}}",
+    "airportLounge": "机场休息室"
 }

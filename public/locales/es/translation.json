@@ -13,5 +13,6 @@
     "howToGetToGate": "Cómo llegar a la puerta {{gate}}",
     "gate": "Puerta {{gate}}",
     "loungeName": "{{loungeName}}",
-    "gateName": "{{gate}}"
+    "gateName": "{{gate}}",
+    "airportLounge": "Lounge del aeropuerto"
 }

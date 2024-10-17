@@ -13,5 +13,6 @@
     "howToGetToGate": "How to get to gate {{gate}}",
     "gate": "Gate {{gate}}",
     "loungeName": "{{loungeName}}",
-    "gateName": "{{gate}}"
+    "gateName": "{{gate}}",
+    "airportLounge": "Airport Lounge"
 }

@@ -71,9 +71,8 @@ const Page: React.FC = () => {
                         headers: { 'Content-Type': 'application/json' },
                     });
                     const data: FaceRecognitionResponse = await response.json();
-                    // if (data.passengerData.language === 'es') {
-                    setApiKey(SOUL_MACHINE_API_KEY.en);
-                    // }
+                    setApiKey(SOUL_MACHINE_API_KEY[data.passengerData.language]);
+                    console.log(data.passengerData);    
                     setPersonaId(data.passengerData.userId);
                     setUser(data.passengerData);
                     i18n.changeLanguage(data.passengerData.language);
@@ -91,7 +90,7 @@ const Page: React.FC = () => {
                 setFaceDetectionStartTime(Date.now());
             } else if (!imageSent) {
                 const elapsedTime = Date.now() - faceDetectionStartTime;
-                if (elapsedTime >= 3000) {
+                if (elapsedTime >= 1000) {
                     if (timeoutRef.current === null) {
                         timeoutRef.current = setTimeout(() => {
                             sendImageToAPI(base64Image);

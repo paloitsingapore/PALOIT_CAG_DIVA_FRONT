@@ -142,20 +142,20 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                             if (user.has_lounge_access) {
                                 options.push({
                                     name: t('lounge', {
-                                        name: user.lounge_name,
+                                        loungeName: user.lounge_name,
                                     }),
                                     action: t('howToGetToLounge', {
-                                        name: user.lounge_name,
+                                        loungeName: user.lounge_name,
                                     }),
                                 });
                             }
                             if (user.gate) {
                                 options.push({
                                     name: t('gate', {
-                                        name: user.gate,
+                                        gate: user.gate,
                                     }),
                                     acction: t('howToGetToGate', {
-                                        name: user.gate,
+                                        gate: user.gate,
                                     }),
                                 });
                             }
@@ -258,7 +258,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                 scene.disconnect();
             }
         };
-    }, [personaId]);
+    }, [personaId, apiKey]);
 
     // send initial message to persona
     useEffect(() => {
