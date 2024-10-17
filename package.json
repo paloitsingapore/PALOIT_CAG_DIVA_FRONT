@@ -14,14 +14,15 @@
         "@react-google-maps/api": "^2.19.3",
         "@soulmachines/smwebsdk": "^15.8.1",
         "axios": "^1.7.7",
+        "i18next": "^23.10.1",
+        "i18next-browser-languagedetector": "^7.2.0",
+        "i18next-http-backend": "^2.5.0",
         "lucide-react": "^0.451.0",
-        "next": "14.2.14",
+        "next": "^14.2.15",
         "react": "^18",
         "react-dom": "^18",
-        "react-use-face-detection": "^1.0.1",
-        "i18next": "^23.10.1",
         "react-i18next": "^14.1.0",
-        "i18next-http-backend": "^2.5.0"
+        "react-use-face-detection": "^1.0.1"
     },
     "devDependencies": {
         "@testing-library/jest-dom": "^6.5.0",
