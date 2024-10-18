@@ -92,6 +92,11 @@ Once the server is running, open [http://localhost:3000](http://localhost:3000) 
 
 You can start editing the page by modifying `app/page.tsx`. Changes will automatically update in the browser as you save the file.
 
+Then, run the build command:
+```npm run build```
+This will generate a static version of your site in the out directory.
+
+
 ## 🚀 Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme), the creators of Next.js.
@@ -100,4 +105,11 @@ For detailed instructions on deploying, check out the [Next.js deployment docume
 
 ## 🚀 Deploy on AWS S3 static
 
-To deploy the application on AWS S3, follow the steps below:
+- Go to the AWS S3 console and create a new bucket.
+- Enable static website hosting in the bucket properties.
+- Set the index document to index.html.
+- Configure the bucket policy to allow public read access.
+- Upload files to S3
+- Upload the contents of the out directory to your S3 bucket. You can use the AWS CLI for this: 
+-- aws s3 sync out s3://your-bucket-name
+- Configure Cloudfront distribution
