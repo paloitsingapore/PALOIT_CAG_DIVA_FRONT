@@ -62,7 +62,6 @@
     padding: 24px 0px 0px 0px;
     gap: 8px;
     border-radius: 24px 0px 0px 0px;
-    opacity: 0px;
 }
 
 .button:hover {
@@ -124,6 +123,9 @@
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: flex-start;
+    flex-grow: 1;
+    border-radius: 24px;
+    margin: 80px;
 }
 
 .mapImage {
@@ -186,7 +188,6 @@
     gap: 0px;
     border-radius: 24px 0px 0px 0px;
     justify: space-between;
-    opacity: 0px;
 }
 
 .helpBox {
@@ -203,12 +204,25 @@
     padding: 24px 32px 24px 32px;
     gap: 8px;
     border-radius: 32px 32px 32px 4px;
-    opacity: 0px;
     background-color: #3e005b;
     padding: 16px;
     /* Optional: Add padding for better appearance */
     color: white;
     /* Optional: Add text color for better readability */
+}
+.welcomeMessage {
+    font-size: 96px;
+    font-weight: 400;
+    font-family: Hind;
+    line-height: 124.8px;
+    max-width: max-content;
+    margin-right: 30px;
+    top: 296px;
+    left: 1394px;
+    padding: 40px 56px;
+    gap: 8px;
+    border-radius: 64px 64px 64px 8px !important;
+    color: white;
 }
 
 .chatBubble {
@@ -225,7 +239,6 @@
     left: 562px;
     /* padding: 24px 32px 24px 32px; */
     gap: 8px;
-    opacity: 0px;
     padding: 48px;
     /* Optional: Add padding for better appearance */
     color: white;
@@ -266,7 +279,6 @@
     padding: 24px 32px 24px 32px;
     gap: 8px;
     border-radius: 32px 32px 32px 4px;
-    opacity: 0px;
     background-color: purple;
     /* padding: 16px; */
     color: white;
@@ -323,6 +335,11 @@
     color: black;
     border: none;
     outline: none;
+    font-family: Hind;
+    font-size: 40px;
+    font-weight: 400;
+    line-height: 52px;
+    text-align: left;
 }
 
 .inputContainer .micIcon {
@@ -400,7 +417,51 @@
     background-color: rgb(62, 0, 91);
     height: '100vh';
 }
+
+.endChatButton {
+    z-index: 1;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20.8px;
+    top: 56px;
+    left: 56px;
+    padding: 12px 24px;
+    gap: 8px;
+    border-radius: 24px;
+    color: rgb(46, 0, 85);
+}
 @media (width: 2732px) and (height: 2048px) {
+    .chatBubbleImage {
+        justify-content: start;
+        padding-top: 20px;
+        width: 1258px;
+        border-radius: 48px;
+    }
+    .chatOptionContainer {
+        gap: '32px';
+        margin-top: '32px';
+    }
+    .chatOptionButton {
+        width: 604px;
+        height: 204px;
+        top: 709px;
+        left: 1394px;
+        padding: 40px 56px;
+        gap: 8px;
+        border-radius: 48px;
+        font-family: Hind;
+        font-size: 56px;
+        line-height: 67.2px;
+        color: #2e0055;
+    }
+
+    .chatBoxLayout {
+        flex-grow: 1;
+        height: 60vh;
+        padding-left: 1rem;
+        overflow-y: scroll;
+        width: 100%;
+    }
     .flexContainer {
         display: flex;
         justify-content: center;
@@ -460,6 +521,206 @@
     }
 }
 
+@media (width: 1180px) and (height: 820px) {
+    .videoWrapper video {
+        border-radius: 32px !important;
+    }
+    .endChatButton {
+        z-index: 1;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 13.8px;
+        top: 22px;
+        left: 14px;
+        padding: 11px 13px;
+        gap: 8px;
+        border-radius: 24px;
+        color: rgb(46, 0, 85);
+    }
+    .backgroundImage {
+        flex-grow: 1;
+        border-radius: 24px;
+        margin: 32px;
+    }
+    .inputContainer {
+        position: relative;
+        width: 100%;
+        margin-top: 16px;
+    }
+
+    .homeLayout {
+        display: flex;
+        flex-direction: column;
+        background-color: #2e0055;
+    }
+
+    .inputContainer input {
+        width: Fixed (553px) px;
+        height: Hug (45px) px;
+        top: 583px;
+        left: 609px;
+        padding: 12px 24px 12px 24px;
+        gap: 0px;
+        border-radius: 24px;
+        justify: space-between;
+
+        width: 100%;
+        background-color: white;
+        color: black;
+        border: none;
+        font-family: Hind;
+        font-size: 16px;
+        font-weight: 400;
+        line-height: 20.8px;
+        text-align: left;
+    }
+
+    .inputContainer .micIcon {
+        position: absolute;
+        size: 16px !important;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .micIconValue {
+        width: 16px;
+        height: 19px;
+    }
+
+    .chatBubble {
+        width: Fill (553px) px;
+        height: Hug (100px) px;
+        padding: 24px 32px 24px 32px;
+        gap: 8px;
+        font-family: Hind;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 26px;
+        text-align: left;
+        margin-top: 16px;
+        letter-spacing: 0.02em;
+        width: Fixed (516px) px;
+        height: Hug (152px) px;
+        top: 123px;
+        left: 562px;
+        gap: 8px;
+    }
+    .systemMessage {
+        background-color: #cf0176;
+
+        border-radius: 32px 32px 32px 4px;
+    }
+    .welcomeMessage {
+        width: Fixed (553px) px;
+        height: Hug (152px) px;
+        top: 111px;
+        left: 609px;
+        padding: 24px 32px 24px 32px;
+        gap: 8px;
+        border-radius: 32px 32px 32px 4px !important;
+        font-family: Hind;
+        font-size: 40px;
+        font-weight: 400;
+        line-height: 52px;
+        letter-spacing: 0.02em;
+        text-align: left;
+        color: white;
+    }
+
+    .chatBubbleImage {
+        justify-content: start;
+        padding-top: 10px;
+        width: 553px;
+        height: 211px;
+        border-radius: 24px;
+    }
+    .chatOptionContainer {
+        gap: '32px';
+        margin-top: '32px';
+    }
+    .chatOptionButton {
+        width: 238px;
+        height: 87px;
+        top: 287px;
+        left: 609px;
+        padding: 24px;
+        gap: 8px;
+        border-radius: 24px;
+        gap: 8px;
+        font-family: Hind;
+        font-size: 22px;
+        font-weight: 500;
+        line-height: 26.4px;
+        text-align: center;
+        color: #2e0055;
+    }
+
+    .chatBoxLayout {
+        flex-grow: 1;
+        height: 60vh;
+        padding-left: 1rem;
+        overflow-y: scroll;
+        width: 100%;
+    }
+    .flexContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1rem;
+        background-color: #2e0055;
+        font-family: 'Hind', sans-serif;
+    }
+
+    .bottomCard {
+        width: 553px;
+        height: 134px;
+        background-color: #6b2ba0;
+        border-radius: 24px;
+        display: flex;
+        overflow: hidden;
+    }
+
+    .bottomCardSection {
+        width: 131px;
+        height: 134px;
+        border-right: 2px solid #2e0055;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bottomCardicon {
+        width: 53px;
+        height: 48px;
+        color: white;
+        margin-bottom: 1rem;
+    }
+
+    .bottomCardTextLarge {
+        font-size: 20px;
+        line-height: 24px;
+        color: white;
+        font-weight: 500;
+    }
+
+    .bottomCardTextMedium {
+        font-size: 22px;
+        line-height: 28.6px;
+        color: white;
+        font-weight: 500;
+        width: 349px;
+        height: 58px;
+    }
+
+    .bottomCardSvgIcon {
+        margin-bottom: 1rem;
+        width: 53px;
+        height: 48px;
+    }
+}
+
 /* Media Queries for Mobile Responsiveness */
 @media (max-width: 600px) {
     .mapImage {
@@ -491,7 +752,6 @@
         padding: 24px 32px 24px 32px;
         gap: 8px;
         border-radius: 32px 32px 32px 4px;
-        opacity: 0px;
         background-color: purple;
         /* padding: 16px; */
         color: white;
@@ -588,6 +848,9 @@
 
 .chatBubbleImage {
     justify-content: start;
+    padding-top: '10px';
+    width: '553px';
+    border-radius: '24px';
 }
 
 @media screen and (max-width: 600px) {

@@ -51,8 +51,7 @@ const Transcript: React.FC<TranscriptProps> = ({
             <div
                 ref={scrollRef}
                 /* max-h-[70vh] */
-                className={`overflow-y-scroll  w-full pl-4`}
-                style={{ flexGrow: 1, height: '60vh' }}
+                className={styles.chatBoxLayout}
             >
                 {transcript.map(
                     (
@@ -73,32 +72,15 @@ const Transcript: React.FC<TranscriptProps> = ({
                             >
                                 <div
                                     className={`w-full rounded-lg p-3 ${
-                                        source === 'user'
-                                            ? `${styles.chatBubble} ${styles.userMessage} bg-blue-500 text-white rounded-br-none`
-                                            : `${styles.chatBubble} ${styles.systemMessage} bg-gray-200 text-black rounded-bl-none`
-                                    }`}
-                                    style={
                                         options && options.length > 0
-                                            ? {
-                                                  fontSize: '96px',
-                                                  fontWeight: '400',
-                                                  fontFamily: 'Hind',
-                                                  lineHeight: '124.8px',
-                                                  maxWidth: 'max-content',
-                                                  marginRight: '30px',
-                                                  /* width: auto; */
-                                                  // width: Fixed(1, 258px) px;
-                                                  // height: Fixed(357px) px;
-                                                  top: '296px',
-                                                  left: '1394px',
-                                                  padding:
-                                                      '40px 56px 40px 56px',
-                                                  gap: '8px',
-                                                  borderRadius:
-                                                      '64px 64px 64px 8px',
-                                              }
-                                            : {}
+                                            ? `${styles.welcomeMessage}`
+                                            : `${styles.chatBubble}`
+                                    }   ${
+                                        source === 'user'
+                                            ? ` ${styles.userMessage} bg-blue-500 text-white rounded-br-none`
+                                            : ` ${styles.systemMessage} bg-gray-200 text-black rounded-bl-none`
                                     }
+                                    `}
                                 >
                                     <div>{text}</div>
                                 </div>
@@ -121,25 +103,18 @@ const Transcript: React.FC<TranscriptProps> = ({
                             {options && options.length > 0 && (
                                 <div
                                     className="grid grid-cols-2"
-                                    style={{ gap: '32px', marginTop: '32px' }}
+                                    style={{
+                                        gap: '8px',
+                                        marginTop: '24px',
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        flexWrap: 'wrap',
+                                    }}
                                 >
                                     {options.map((option, optionIndex) => (
                                         <button
                                             key={optionIndex}
-                                            className="p-2 text-center rounded-lg bg-fuchsia-100 text-purple-950"
-                                            style={{
-                                                width: '604px',
-                                                height: '204px',
-                                                top: '709px',
-                                                left: '1394px',
-                                                padding: '40px 56px',
-                                                gap: '8px',
-                                                borderRadius: '48px',
-                                                fontFamily: 'Hind',
-                                                fontSize: '56px',
-                                                lineHeight: '67.2px',
-                                                color: 'background: #2E0055',
-                                            }}
+                                            className={`p-2 text-center rounded-lg bg-fuchsia-100 text-purple-950 ${styles.chatOptionButton}`}
                                             onClick={() =>
                                                 onSendMessage(
                                                     option.action ||
@@ -165,16 +140,13 @@ const Transcript: React.FC<TranscriptProps> = ({
                     value={inputValue}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
-                    style={{
-                        fontFamily: 'Hind',
-                        fontSize: '40px',
-                        fontWeight: 400,
-                        lineHeight: '52px',
-                        textAlign: 'left',
-                    }}
                 />
                 <div className={styles.micIcon}>
-                    <Mic size={35} color="#A645A6" />
+                    <Mic
+                        className={styles.micIconValue}
+                        size={35}
+                        color="#A645A6"
+                    />
                 </div>
             </div>
         </>

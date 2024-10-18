@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback, useRef, Suspense } from 'react';
+import React from 'react';
 import DigitalPersona from '@AssistedWayinding/components/organisms/DigitalPersona';
 import { Wifi } from 'lucide-react';
 import styles from '@AssistedWayinding/styles/Help.module.css';
@@ -20,12 +21,12 @@ const FaceDetectionComponent = dynamic(
         ssr: false, // This will prevent server-side rendering
     },
 );
-export interface PassengerData {
+export type PassengerData = {
     changi_app_user_id: string;
     passengerId: string;
     imageUrls: string[];
     name: string;
-    language: string;
+    language: 'en' | 'es' | 'zh' | undefined;
     gate: string;
     has_lounge_access: boolean;
     rekognition_collection_id: string;
@@ -40,12 +41,12 @@ export interface PassengerData {
     };
     faceIds: string[];
     airline: string;
-}
+};
 
-interface FaceRecognitionResponse {
+type FaceRecognitionResponse = {
     message: string;
     passengerData: PassengerData;
-}
+};
 
 const Home: React.FC = () => {
     const { t, i18n } = useTranslation();
@@ -54,51 +55,68 @@ const Home: React.FC = () => {
         number | null
     >(null);
     const [imageSent, setImageSent] = useState(false);
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const [user, setUser] = useState<PassengerData | undefined>(undefined);
     const [apiKey, setApiKey] = useState<string>(SOUL_MACHINE_API_KEY.en);
     const sendImageToAPI = useCallback(
         async (base64Image: string) => {
-            if (!imageSent) {
-                console.log('Sending image to API');
+            if (imageSent) return;
+            console.log('Sending image to API');
 
-                try {
-                    setImageSent(true);
-                    const response = await fetch(API_ENDPOINTS.RECOGNIZE, {
-                        method: 'POST',
-                        body: JSON.stringify({ image: base64Image }),
-                        headers: { 'Content-Type': 'application/json' },
-                    });
-                    const data: FaceRecognitionResponse = await response.json();
-                    setApiKey(
-                        SOUL_MACHINE_API_KEY[data.passengerData.language],
+            try {
+                setFaceDetectionStartTime(null);
+                console.log('Fetching from API:', API_ENDPOINTS.RECOGNIZE);
+                const response = await fetch(API_ENDPOINTS.RECOGNIZE, {
+                    method: 'POST',
+                    body: JSON.stringify({ image: base64Image }),
+                    headers: { 'Content-Type': 'application/json' },
+                });
+                console.log('API response status:', response.status);
+                const data: FaceRecognitionResponse = await response.json();
+                console.log('API response data:', data);
+                if (data.passengerData) {
+                    console.log('Passenger data received:', data.passengerData);
+                    console.log('personaId:', personaId);
+                    console.log(
+                        'data.passengerData.changi_app_user_id:',
+                        data.passengerData.userId,
                     );
-                    console.log(data.passengerData);
-                    setPersonaId(data.passengerData.userId);
+                    if (data.passengerData.userId === personaId) {
+                        console.log('Same person detected, returning');
+                        return;
+                    }
                     setUser(data.passengerData);
+                    setApiKey(
+                        SOUL_MACHINE_API_KEY[data.passengerData.language] ||
+                            SOUL_MACHINE_API_KEY.en,
+                    );
+                    setPersonaId(data.passengerData.userId);
                     i18n.changeLanguage(data.passengerData.language);
-                } catch (error) {
-                    console.error('Error sending image to API:', error);
                 }
+            } catch (error) {
+                console.error('Error sending image to API:', error);
             }
         },
-        [imageSent],
+        [i18n, imageSent, personaId],
     );
 
     const handleFaceDetected = useCallback(
         (base64Image: string) => {
             if (faceDetectionStartTime === null) {
-                setFaceDetectionStartTime(Date.now());
-            } else if (!imageSent) {
+                console.log('Setting faceDetectionStartTime');
+                return setFaceDetectionStartTime(Date.now());
+            }
+
+            if (!imageSent) {
                 const elapsedTime = Date.now() - faceDetectionStartTime;
+                // console.log('Elapsed time since face detection:', elapsedTime);
                 if (elapsedTime >= 1000) {
-                    if (timeoutRef.current === null) {
-                        timeoutRef.current = setTimeout(() => {
-                            sendImageToAPI(base64Image);
-                            timeoutRef.current = null;
-                        }, 0);
-                    }
+                    console.log('Elapsed time >= 1000ms, sending image to API');
+                    sendImageToAPI(base64Image);
+                    setImageSent(true);
                 }
+                setTimeout(() => {
+                    setImageSent(false);
+                }, 5000);
             }
         },
         [faceDetectionStartTime, sendImageToAPI, imageSent],
@@ -113,10 +131,11 @@ const Home: React.FC = () => {
 
     return (
         <div
+            className={styles.homeLayout}
             style={{
                 display: 'flex',
                 flexDirection: 'column',
-                backgroundColor: 'rgb(62, 0, 91)',
+                backgroundColor: '#2e0055',
                 height: '100vh',
             }}
         >

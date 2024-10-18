@@ -6,13 +6,13 @@ import styles from '@AssistedWayinding/styles/Help.module.css';
 import { PassengerData } from '@AssistedWayinding/app/page';
 import { useTranslation } from 'react-i18next';
 
-interface DigitalPersonaProps {
+type DigitalPersonaProps = {
     personaId: string;
     disableAvatar?: boolean;
     user?: PassengerData;
     apiKey: string;
     onEndConversation?: () => void;
-}
+};
 
 const DigitalPersona: React.FC<DigitalPersonaProps> = ({
     personaId,
@@ -71,7 +71,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                 const attributes: { [key: string]: any } = {};
                 // Handle incoming messages and update transcript
                 if (message.name === 'personaResponse') {
-                    console.log(`Message: ${JSON.stringify(message)}`);
+                    // console.log(`Message: ${JSON.stringify(message)}`);
                     if (message.body.currentSpeech) {
                         // Check for "Qantas bag drop" using a flexible regex
                         const qantasBagDropRegex =
@@ -89,6 +89,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                         if (wheelchairRegex.test(message.body.currentSpeech)) {
                             attributes['image'] = [
                                 'https://i.imgur.com/e5afI8w.png',
+                                'https://i.imgur.com/PLwUvk0.png',
                             ];
                         }
 
@@ -109,7 +110,8 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                         const b4Regex = /\bb4\b/i;
                         if (b4Regex.test(message.body.currentSpeech)) {
                             attributes['image'] = [
-                                'https://i.imgur.com/eFuENyt.png',
+                                'https://i.imgur.com/cr7ZrL9.png',
+                                'https://i.imgur.com/x3S1Lqz.png',
                             ];
                         }
 
@@ -169,7 +171,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                         );
                     }
                 } else if (message.name === 'recognizeResults') {
-                    console.log(`Message: ${JSON.stringify(message)}`);
+                    // console.log(`Message: ${JSON.stringify(message)}`);
                     if (
                         message.body.results &&
                         message.body.results[0] &&
@@ -310,14 +312,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
     };
 
     return (
-        <div
-            className={styles.backgroundImage}
-            style={{
-                flexGrow: 1,
-                borderRadius: '24px 24px 24px 24px',
-                margin: '80px',
-            }}
-        >
+        <div className={styles.backgroundImage}>
             <Help
                 children={
                     disableAvatar ? (
@@ -327,20 +322,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                             {videoLoaded && (
                                 <button
                                     onClick={handleEndConversation}
-                                    className="absolute top-4 left-4 bg-white text-black px-4 py-2 rounded-full text-sm font-semibold "
-                                    style={{
-                                        zIndex: 1,
-                                        fontWeight: '400',
-                                        fontSize: '16px',
-                                        lineHeight: '20.8px',
-                                        top: '56px',
-                                        left: '56px',
-                                        padding: '12px 24px 12px 24px',
-                                        gap: '8px',
-                                        borderRadius: '24px',
-                                        opacity: '0px',
-                                        color: '#2E0055',
-                                    }}
+                                    className={`absolute top-4 left-4 bg-white text-black px-4 py-2 rounded-full text-sm font-semibold ${styles.endChatButton}`}
                                 >
                                     End conversation
                                 </button>
