@@ -2,6 +2,7 @@ import React, { useState, useEffect, ReactNode } from 'react';
 import styles from '@AssistedWayinding/styles/Help.module.css';
 import mockData from '../../data/mockCard.json'; // Import the mock data
 import Transcript, { TranscriptEntry } from '../molecules/Transcript';
+import { API_ENDPOINTS } from '@AssistedWayinding/config/apiConfig';
 interface Action {
     action_type: string;
     action_target: string;
@@ -30,7 +31,11 @@ interface HelpProps {
     onSendMessage: (message: string) => void;
 }
 
-export default function Help({ children, transcript, onSendMessage }: HelpProps) {
+export default function Help({
+    children,
+    transcript,
+    onSendMessage,
+}: HelpProps) {
     const [actions, setActions] = useState<Action[]>([]);
     const [showGateInfo, setShowGateInfo] = useState(false);
     const [gateInfo, setGateInfo] = useState<GateInfo | null>(null);
@@ -39,7 +44,11 @@ export default function Help({ children, transcript, onSendMessage }: HelpProps)
         // Fetch data from the API
         const fetchActions = async () => {
             try {
-                const response = await fetch('YOUR_API_ENDPOINT');
+                if (typeof YOUR_API_ENDPOINT === 'undefined') {
+                    setActions(mockData);
+                    return;
+                }
+                const response = await fetch(YOUR_API_ENDPOINT);
                 const data = await response.json();
                 if (data && data.length > 0) {
                     setActions(data);
@@ -56,28 +65,14 @@ export default function Help({ children, transcript, onSendMessage }: HelpProps)
         fetchActions();
     }, []);
 
-    const handleOptionClick = async (option: string) => {
-        if (option.startsWith('Gate')) {
-            try {
-                const response = await fetch(
-                    'https://ed5zq5eya8.execute-api.ap-southeast-1.amazonaws.com/prod//directions/checkin/' +
-                    option,
-                );
-                const data: GateInfo = await response.json();
-                setGateInfo(data);
-                setShowGateInfo(true);
-            } catch (error) {
-                console.error('Error fetching gate info:', error);
-            }
-        }
-        // Logic for other options can go here.
-    };
-
     return (
         <div className={styles.container}>
             {children && <div className={styles.videoWrapper}>{children}</div>}
             <div className={styles.dialogBox}>
-                <Transcript transcript={transcript ?? []} onSendMessage={onSendMessage} />
+                <Transcript
+                    transcript={transcript ?? []}
+                    onSendMessage={onSendMessage}
+                />
             </div>
         </div>
     );
