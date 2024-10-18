@@ -55,53 +55,68 @@ const Home: React.FC = () => {
         number | null
     >(null);
     const [imageSent, setImageSent] = useState(false);
-    const timeoutRef = useRef<NodeJS.Timeout | null>(null);
     const [user, setUser] = useState<PassengerData | undefined>(undefined);
     const [apiKey, setApiKey] = useState<string>(SOUL_MACHINE_API_KEY.en);
     const sendImageToAPI = useCallback(
         async (base64Image: string) => {
-            if (!imageSent) {
-                console.log('Sending image to API');
+            if (imageSent) return;
+            console.log('Sending image to API');
 
-                try {
-                    setImageSent(true);
-                    const response = await fetch(API_ENDPOINTS.RECOGNIZE, {
-                        method: 'POST',
-                        body: JSON.stringify({ image: base64Image }),
-                        headers: { 'Content-Type': 'application/json' },
-                    });
-                    const data: FaceRecognitionResponse = await response.json();
-                    if (data.passengerData) {
-                        setUser(data.passengerData);
-                        setApiKey(
-                            SOUL_MACHINE_API_KEY[data.passengerData.language] ||
-                                SOUL_MACHINE_API_KEY.en,
-                        );
-                        setPersonaId(data.passengerData.userId);
-                        i18n.changeLanguage(data.passengerData.language);
+            try {
+                setFaceDetectionStartTime(null);
+                console.log('Fetching from API:', API_ENDPOINTS.RECOGNIZE);
+                const response = await fetch(API_ENDPOINTS.RECOGNIZE, {
+                    method: 'POST',
+                    body: JSON.stringify({ image: base64Image }),
+                    headers: { 'Content-Type': 'application/json' },
+                });
+                console.log('API response status:', response.status);
+                const data: FaceRecognitionResponse = await response.json();
+                console.log('API response data:', data);
+                if (data.passengerData) {
+                    console.log('Passenger data received:', data.passengerData);
+                    console.log('personaId:', personaId);
+                    console.log(
+                        'data.passengerData.changi_app_user_id:',
+                        data.passengerData.userId,
+                    );
+                    if (data.passengerData.userId === personaId) {
+                        console.log('Same person detected, returning');
+                        return;
                     }
-                } catch (error) {
-                    console.error('Error sending image to API:', error);
+                    setUser(data.passengerData);
+                    setApiKey(
+                        SOUL_MACHINE_API_KEY[data.passengerData.language] ||
+                            SOUL_MACHINE_API_KEY.en,
+                    );
+                    setPersonaId(data.passengerData.userId);
+                    i18n.changeLanguage(data.passengerData.language);
                 }
+            } catch (error) {
+                console.error('Error sending image to API:', error);
             }
         },
-        [imageSent],
+        [i18n, imageSent, personaId],
     );
 
     const handleFaceDetected = useCallback(
         (base64Image: string) => {
             if (faceDetectionStartTime === null) {
-                setFaceDetectionStartTime(Date.now());
-            } else if (!imageSent) {
+                console.log('Setting faceDetectionStartTime');
+                return setFaceDetectionStartTime(Date.now());
+            }
+
+            if (!imageSent) {
                 const elapsedTime = Date.now() - faceDetectionStartTime;
+                // console.log('Elapsed time since face detection:', elapsedTime);
                 if (elapsedTime >= 1000) {
-                    if (timeoutRef.current === null) {
-                        timeoutRef.current = setTimeout(() => {
-                            sendImageToAPI(base64Image);
-                            timeoutRef.current = null;
-                        }, 0);
-                    }
+                    console.log('Elapsed time >= 1000ms, sending image to API');
+                    sendImageToAPI(base64Image);
+                    setImageSent(true);
                 }
+                setTimeout(() => {
+                    setImageSent(false);
+                }, 5000);
             }
         },
         [faceDetectionStartTime, sendImageToAPI, imageSent],

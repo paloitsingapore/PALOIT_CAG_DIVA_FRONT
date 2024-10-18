@@ -71,7 +71,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                 const attributes: { [key: string]: any } = {};
                 // Handle incoming messages and update transcript
                 if (message.name === 'personaResponse') {
-                    console.log(`Message: ${JSON.stringify(message)}`);
+                    // console.log(`Message: ${JSON.stringify(message)}`);
                     if (message.body.currentSpeech) {
                         // Check for "Qantas bag drop" using a flexible regex
                         const qantasBagDropRegex =
@@ -171,7 +171,7 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                         );
                     }
                 } else if (message.name === 'recognizeResults') {
-                    console.log(`Message: ${JSON.stringify(message)}`);
+                    // console.log(`Message: ${JSON.stringify(message)}`);
                     if (
                         message.body.results &&
                         message.body.results[0] &&
