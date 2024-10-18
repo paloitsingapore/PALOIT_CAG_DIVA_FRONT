@@ -430,6 +430,19 @@
     border-radius: 24px;
     color: rgb(46, 0, 85);
 }
+.chatOptionButton {
+    width: 604px;
+    height: 204px;
+    top: 709px;
+    left: 1394px;
+    padding: 40px 56px;
+    gap: 8px;
+    border-radius: 48px;
+    font-family: Hind;
+    font-size: 56px;
+    line-height: 67.2px;
+    color: #2e0055;
+}
 @media (width: 2732px) and (height: 2048px) {
     .chatBubbleImage {
         justify-content: start;
