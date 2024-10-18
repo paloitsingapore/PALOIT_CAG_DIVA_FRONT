@@ -26,7 +26,7 @@ export type PassengerData = {
     passengerId: string;
     imageUrls: string[];
     name: string;
-    language: string;
+    language: 'en' | 'es' | 'zh' | undefined;
     gate: string;
     has_lounge_access: boolean;
     rekognition_collection_id: string;
@@ -71,13 +71,15 @@ const Home: React.FC = () => {
                         headers: { 'Content-Type': 'application/json' },
                     });
                     const data: FaceRecognitionResponse = await response.json();
-                    setApiKey(
-                        SOUL_MACHINE_API_KEY[data.passengerData.language],
-                    );
-                    console.log(data.passengerData);
-                    setPersonaId(data.passengerData.userId);
-                    setUser(data.passengerData);
-                    i18n.changeLanguage(data.passengerData.language);
+                    if (data.passengerData) {
+                        setUser(data.passengerData);
+                        setApiKey(
+                            SOUL_MACHINE_API_KEY[data.passengerData.language] ||
+                                SOUL_MACHINE_API_KEY.en,
+                        );
+                        setPersonaId(data.passengerData.userId);
+                        i18n.changeLanguage(data.passengerData.language);
+                    }
                 } catch (error) {
                     console.error('Error sending image to API:', error);
                 }
