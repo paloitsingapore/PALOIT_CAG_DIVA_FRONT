@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styles from '@AssistedWayinding/styles/Help.module.css';
-import { Mic } from 'lucide-react';
+import { Mic, MicOff } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 export interface TranscriptEntry {
@@ -19,11 +19,15 @@ export interface TranscriptEntry {
 interface TranscriptProps {
     transcript: TranscriptEntry[];
     onSendMessage: (message: string) => void;
+    onToggleMic: () => void;
+    isMicActive: boolean;
 }
 
 const Transcript: React.FC<TranscriptProps> = ({
     transcript,
     onSendMessage,
+    onToggleMic,
+    isMicActive,
 }) => {
     const { t } = useTranslation();
     const scrollRef = useRef<HTMLDivElement>(null);
@@ -141,12 +145,20 @@ const Transcript: React.FC<TranscriptProps> = ({
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                 />
-                <div className={styles.micIcon}>
-                    <Mic
-                        className={styles.micIconValue}
-                        size={35}
-                        color="#A645A6"
-                    />
+                <div onClick={onToggleMic} className={styles.micIcon}>
+                    {isMicActive ? (
+                        <Mic
+                            className={styles.micIconValue}
+                            size={35}
+                            color="#A645A6"
+                        />
+                    ) : (
+                        <MicOff
+                            className={styles.micIconValue}
+                            size={35}
+                            color="#A645A6"
+                        />
+                    )}
                 </div>
             </div>
         </>
