@@ -31,6 +31,8 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
     const handleVideoLoaded = () => {
         setVideoLoaded(true);
     };
+    const [isMicActive, setIsMicActive] = useState(false);
+
     useEffect(() => {
         if (videoRef.current) {
             videoRef.current.addEventListener('loadeddata', handleVideoLoaded);
@@ -202,6 +204,12 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
         }
     }, [personaId, videoRef]);
 
+    useEffect(() => {
+        if (scene) {
+            setIsMicActive(scene.isMicrophoneActive());
+        }
+    }, [scene]);
+
     const handleEndConversation = () => {
         setTranscript([]); // Clear the transcript
         initializeSceneAndPersona(); // Reload the scene and persona
@@ -311,6 +319,23 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
             });
     };
 
+    const handleMicToggle = () => {
+        if (scene) {
+            const active = scene.isMicrophoneActive();
+            console.log('toggle microphone', !active);
+            scene
+                .setMediaDeviceActive({
+                    microphone: !active,
+                })
+                .then(() => {
+                    setIsMicActive(!active);
+                })
+                .catch(console.error);
+        }
+    };
+
+    console.log(scene?.isMicrophoneActive());
+
     return (
         <div className={styles.backgroundImage}>
             <Help
@@ -340,8 +365,10 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                         </div>
                     )
                 }
+                onToggleMic={handleMicToggle}
                 transcript={transcript}
                 onSendMessage={handleSendMessage}
+                isMicActive={isMicActive}
             />
         </div>
     );

@@ -6,12 +6,16 @@ type HelpProps = {
     children?: ReactNode;
     transcript?: TranscriptEntry[];
     onSendMessage: (message: string) => void;
+    onToggleMic: () => void;
+    isMicActive: boolean;
 };
 
 export default function Help({
     children,
     transcript,
     onSendMessage,
+    onToggleMic,
+    isMicActive,
 }: HelpProps) {
     return (
         <div className={styles.container}>
@@ -20,6 +24,8 @@ export default function Help({
                 <Transcript
                     transcript={transcript ?? []}
                     onSendMessage={onSendMessage}
+                    onToggleMic={onToggleMic}
+                    isMicActive={isMicActive}
                 />
             </div>
         </div>
