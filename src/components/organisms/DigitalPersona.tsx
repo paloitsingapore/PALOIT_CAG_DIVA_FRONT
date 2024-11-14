@@ -87,13 +87,13 @@ const DigitalPersona: React.FC<DigitalPersonaProps> = ({
                         }
 
                         // if wheelchair, add image
-                        const wheelchairRegex = /\b(?=.*wheelchair).*\b/i;
-                        if (wheelchairRegex.test(message.body.currentSpeech)) {
-                            attributes['image'] = [
-                                'https://i.imgur.com/e5afI8w.png',
-                                'https://i.imgur.com/PLwUvk0.png',
-                            ];
-                        }
+                        // const wheelchairRegex = /\b(?=.*wheelchair).*\b/i;
+                        // if (wheelchairRegex.test(message.body.currentSpeech)) {
+                        //     attributes['image'] = [
+                        //         'https://i.imgur.com/e5afI8w.png',
+                        //         'https://i.imgur.com/PLwUvk0.png',
+                        //     ];
+                        // }
 
                         // if "level 1", add image
                         const level1Regex = /\b(?=.*level)(?=.*1).*\b/i;
