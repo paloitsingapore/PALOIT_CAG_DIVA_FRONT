@@ -103,6 +103,11 @@ For detailed instructions on deploying, check out the [Next.js deployment docume
 -- aws s3 sync out s3://your-bucket-name
 - Configure Cloudfront distribution
 
+## Deploy with Amplify (current deployment method)
+
+- Run `npm run build`
+- Zip the content of the `out` folder not the `out` folder itself
+- Upload the zip file as new amplify deployment in the console
 
 ### POC hosted on AWS 
 
@@ -115,7 +120,7 @@ The project use AWS Rekognition to recongnise the face of the Eldery passengers 
 1 - use the backend to add Faces to the database and associate with a persona.
 
 2 - Access the front end using this link
-http://staging.d32b1muquuvyhn.amplifyapp.com
+https://staging-v-2.d3q6ezxdh8nybd.amplifyapp.com
 
 The UI is optimised for screens Ipad with 1366 x 1024 resolution.
 
